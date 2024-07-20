@@ -35,7 +35,6 @@
             this.Label9 = new System.Windows.Forms.Label();
             this.ProgressBarEx5 = new System.Windows.Forms.ProgressBar();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtDbName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.DateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -66,8 +65,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -77,7 +74,6 @@
             this.btnBackup = new System.Windows.Forms.Button();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -162,14 +158,6 @@
             this.label6.TabIndex = 1360;
             this.label6.Text = "اسم القاعدة";
             // 
-            // txtDbName
-            // 
-            this.txtDbName.Enabled = false;
-            this.txtDbName.Location = new System.Drawing.Point(750, 150);
-            this.txtDbName.Name = "txtDbName";
-            this.txtDbName.Size = new System.Drawing.Size(67, 25);
-            this.txtDbName.TabIndex = 1359;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -208,7 +196,7 @@
             // LinkLabel1
             // 
             this.LinkLabel1.AutoSize = true;
-            this.LinkLabel1.Enabled = false;
+            this.LinkLabel1.LinkColor = System.Drawing.Color.Teal;
             this.LinkLabel1.Location = new System.Drawing.Point(266, 126);
             this.LinkLabel1.Name = "LinkLabel1";
             this.LinkLabel1.Size = new System.Drawing.Size(0, 17);
@@ -220,11 +208,12 @@
             this.Label7.AutoSize = true;
             this.Label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Label7.Location = new System.Drawing.Point(351, 129);
+            this.Label7.Location = new System.Drawing.Point(262, 101);
             this.Label7.Name = "Label7";
             this.Label7.Size = new System.Drawing.Size(109, 17);
             this.Label7.TabIndex = 1351;
             this.Label7.Text = "موقع حفظ النسخة";
+            this.Label7.Click += new System.EventHandler(this.Label7_Click);
             // 
             // btnSave
             // 
@@ -501,26 +490,6 @@
             this.label10.TabIndex = 1391;
             this.label10.Text = "عدد الملفات";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label14.Location = new System.Drawing.Point(823, 150);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(73, 17);
-            this.label14.TabIndex = 1393;
-            this.label14.Text = "اسم القاعده";
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Image = global::DBBACKUP.Properties.Resources.database_30px3;
-            this.pictureBox7.Location = new System.Drawing.Point(705, 150);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(37, 37);
-            this.pictureBox7.TabIndex = 1392;
-            this.pictureBox7.TabStop = false;
-            // 
             // pictureBox6
             // 
             this.pictureBox6.Image = global::DBBACKUP.Properties.Resources.search_database_30px;
@@ -609,8 +578,6 @@
             this.ClientSize = new System.Drawing.Size(984, 483);
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.pictureBox8);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox5);
@@ -636,7 +603,6 @@
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtDbName);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnBackup);
@@ -660,7 +626,6 @@
             this.Load += new System.EventHandler(this.FrmDbBackup_Load);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -685,7 +650,6 @@
         internal System.Windows.Forms.Label Label9;
         internal System.Windows.Forms.ProgressBar ProgressBarEx5;
         internal System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtDbName;
         internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.Button btnBackup;
@@ -723,8 +687,6 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Label label10;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        internal System.Windows.Forms.Label label14;
         private System.Windows.Forms.PictureBox pictureBox8;
     }
 }

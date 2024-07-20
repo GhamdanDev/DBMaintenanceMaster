@@ -14,7 +14,7 @@ namespace DBBACKUP
         private SqlCommand cmd;
         private SqlConnection sqlCon;
         private SqlDataReader dr;
-        private string conString = "Data Source=.; Initial Catalog=DemoTest; Integrated Security=True;";
+        private string conString = "Data Source=.; Initial Catalog=infoDB; Integrated Security=True;";
         private SqlConnection con;
         private SqlCommand cmd2;
 
@@ -26,7 +26,11 @@ namespace DBBACKUP
 
         private void InitializeDatabaseConnection()
         {
-            sqlCon = new SqlConnection(conString);
+            string connectionString = "Data Source=.;Integrated Security=True;";
+            var databaseManager = new DatabaseManager(connectionString);
+            databaseManager.CheckAndCreateDatabaseTables("infoDB");
+            sqlCon = new SqlConnection("Data Source=.; Initial Catalog=infoDB; Integrated Security=True;");
+            
         }
 
         private void FrmDbBackup_Load(object sender, EventArgs e)
@@ -39,9 +43,7 @@ namespace DBBACKUP
             }
 
             serverName(".");
-            string connectionString = "Data Source=.;Integrated Security=True;";
-            var databaseManager = new DatabaseManager(connectionString);
-            databaseManager.CheckAndCreateDatabaseTables("infoDB");
+           
         }
         private string GetConnectionString(string serverName)
         {
@@ -112,7 +114,6 @@ namespace DBBACKUP
                             LinkLabel1.Text = dsData.Tables[0].Rows[0]["LOCATION"].ToString();
                             txtNoOfFiles.Text = dsData.Tables[0].Rows[0]["NoOfFiles"].ToString();
                             txtSpan.Text = dsData.Tables[0].Rows[0]["DayInterval"].ToString();
-                            txtDbName.Text = dsData.Tables[0].Rows[0]["DATABASENAME"].ToString();
                             linkLabel2.Text = dsData.Tables[0].Rows[0]["LOCATION"].ToString();
                             linkLabel3.Text = dsData.Tables[0].Rows[0]["DATABASENAME"].ToString() + "-" + DateTime.Now.ToString("ddMMyyyyHHmmssfff") + ".bak";
                         }
@@ -288,7 +289,7 @@ namespace DBBACKUP
                 using (SqlConnection sqlCon = new SqlConnection(conString))
                 {
                     sqlCon.Open();
-                    string query = "SELECT TOP 1 [DayInterval] FROM [DemoTest].[dbo].[tblBackupInfo] ORDER BY [LastEditDate] DESC";
+                    string query = "SELECT TOP 1 [DayInterval] FROM [infoDB].[dbo].[tblBackupInfo] ORDER BY [LastEditDate] DESC";
                     using (SqlCommand command = new SqlCommand(query, sqlCon))
                     {
                         object result = command.ExecuteScalar();
@@ -326,7 +327,7 @@ namespace DBBACKUP
 
         private void PerformBackup()
         {
-            string query = "SELECT TOP (1) [DatabaseName], [Location], [NoOfFiles] FROM [DemoTest].[dbo].[tblBackupInfo] ORDER BY [LastEditDate] DESC";
+            string query = "SELECT TOP (1) [DatabaseName], [Location], [NoOfFiles] FROM [infoDB].[dbo].[tblBackupInfo] ORDER BY [LastEditDate] DESC";
             try
             {
                 using (SqlConnection connection = new SqlConnection(conString))
@@ -356,7 +357,7 @@ namespace DBBACKUP
                                 }
 
                                 // Update LastEditDate in tblBackupInfo
-                                string updateQuery = $"UPDATE [DemoTest].[dbo].[tblBackupInfo] SET [LastEditDate] = GETDATE() WHERE [DatabaseName] = '{dbName}'";
+                                string updateQuery = $"UPDATE [infoDB].[dbo].[tblBackupInfo] SET [LastEditDate] = GETDATE() WHERE [DatabaseName] = '{dbName}'";
                                 using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
                                 {
                                     updateCommand.ExecuteNonQuery();
@@ -468,6 +469,11 @@ namespace DBBACKUP
         }
 
         private void lblLastBackupInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label7_Click(object sender, EventArgs e)
         {
 
         }
