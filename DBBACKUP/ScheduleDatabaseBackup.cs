@@ -213,8 +213,52 @@ namespace DBBACKUP
             return connection;
         }
 
-      
 
+        private void InfoOfDBTables(string databaseName)
+        {
+            // استبدل قيمة connectionString بقيمة الاتصال بقاعدة البيانات الخاصة بك
+            string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True;";
+
+            // تضمين أمر USE database وأوامر DBCC SHRINKFILE ضمن النص الخاص بالأمر
+            string query = $@"
+    USE {databaseName};
+    SELECT  
+        t.NAME AS TableName,
+        SUM(ps.row_count) AS RowCounts,
+        SUM(ps.reserved_page_count) * 8 AS TotalSpaceKB,
+        SUM(ps.used_page_count) * 8 AS UsedSpaceKB,
+        (SUM(ps.reserved_page_count) - SUM(ps.used_page_count)) * 8 AS UnusedSpaceKB
+    FROM 
+        {databaseName}.sys.dm_db_partition_stats ps
+    INNER JOIN 
+        {databaseName}.sys.tables t ON ps.object_id = t.object_id
+    GROUP BY 
+        t.NAME
+    ORDER BY 
+        TotalSpaceKB DESC;
+    ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.DataSource = dataTable;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"حدث خطأ: {ex.Message}");
+                    }
+                }
+            }
+        }
         private void AddUser(string userName, string password, string database)
         {
             string queryLogin = $"CREATE LOGIN {userName} WITH PASSWORD = '{password}'";
@@ -385,6 +429,9 @@ namespace DBBACKUP
 
         private void checkedListDatabaseName_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            InfoOfDBTables(checkedListDatabaseName.Text);
+
             labelDBDetails.Text = checkedListDatabaseName.Text;
             string dbId = databasedetails[checkedListDatabaseName.Text];
             string connectionString = "Data Source=" + ComboBoxserverName.Text + ";Database=Master;Integrated Security=True;";
@@ -402,16 +449,31 @@ namespace DBBACKUP
                         label3.Text = dr[12].ToString();
                         label5.Text = dr[2].ToString();
                         label6.Text = dr[6].ToString();
-                        label7.Text = "log file";
-                        label8.Text = "file guid";
-                        label10.Text = "growth";
-                        label11.Text = "type desc";
-                        label12.Text = "State desc";
-                        label14.Text = "file location";
+                        label7.Text = "ملف الوق";
+                        label8.Text = "دليل الملف";
+                        label10.Text = "التوسع";
+                        label11.Text = "نوع القرص";
+                        label12.Text = "حالة القرص";
+                        label14.Text = "موقع الملف";
                     }
                     dr.Close();
                 }
             }
+        }
+
+        private void label19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelDBDetails_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

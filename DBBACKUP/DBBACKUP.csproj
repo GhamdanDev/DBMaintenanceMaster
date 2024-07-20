@@ -52,6 +52,7 @@
     <Compile Include="ClearableTextBox.Designer.cs">
       <DependentUpon>ClearableTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseManager.cs" />
     <Compile Include="DataBase_Info_Fix.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +91,12 @@
     <Compile Include="ScheduleDatabaseBackup.Designer.cs">
       <DependentUpon>ScheduleDatabaseBackup.cs</DependentUpon>
     </Compile>
+    <Compile Include="TableManagment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableManagment.Designer.cs">
+      <DependentUpon>TableManagment.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ClearableTextBox.resx">
       <DependentUpon>ClearableTextBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,6 +128,9 @@
     <EmbeddedResource Include="ScheduleDatabaseBackup.resx">
       <DependentUpon>ScheduleDatabaseBackup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TableManagment.resx">
+      <DependentUpon>TableManagment.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -136,6 +146,36 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="database.png" />
+    <None Include="Resources\info_30px.png" />
+    <None Include="Resources\imac_clock_30px.png" />
+    <None Include="Resources\data_backup_30px.png" />
+    <None Include="Resources\database_30px.png" />
+    <None Include="Resources\web_analytics_100px.png" />
+    <None Include="Resources\plot_100px.png" />
+    <None Include="Resources\plot_30px.png" />
+    <None Include="Resources\collapse_30px.png" />
+    <None Include="Resources\to_do_30px.png" />
+    <None Include="Resources\numbered_list_30px.png" />
+    <None Include="Resources\financial_growth_analysis_30px.png" />
+    <None Include="Resources\add_list_30px.png" />
+    <None Include="Resources\search_in_cloud_30px.png" />
+    <None Include="Resources\search_database_30px.png" />
+    <None Include="Resources\folder_30px.png" />
+    <None Include="Resources\unlock_30px.png" />
+    <None Include="Resources\lock_30px.png" />
+    <None Include="Resources\unlock_10px.png" />
+    <None Include="Resources\shield_100px.png" />
+    <None Include="Resources\security_portal_100px.png" />
+    <None Include="Resources\lock_10px.png" />
+    <None Include="Resources\folder_10px.png" />
+    <None Include="Resources\users_settings_50px.png" />
+    <None Include="Resources\pie_chart_50px.png" />
+    <None Include="Resources\cloud_storage_50px.png" />
+    <None Include="Resources\add_user_male_50px.png" />
+    <None Include="Resources\electrical_30px.png" />
+    <None Include="Resources\search_database_50px.png" />
+    <None Include="Resources\table_50px.png" />
+    <None Include="Resources\chart_50px.png" />
     <None Include="Resources\information.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
