@@ -483,6 +483,13 @@ namespace DBBACKUP
             SpeechRecognition speechRecognition = new SpeechRecognition();
             speechRecognition.Show();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            QueryAnalyzer queryAnalyzer = new QueryAnalyzer();
+            queryAnalyzer.Show();
+
+        }
     }
 
 

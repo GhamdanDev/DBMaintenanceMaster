@@ -145,6 +145,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryAnalyzer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QueryAnalyzer.Designer.cs">
+      <DependentUpon>QueryAnalyzer.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScheduleDatabaseBackup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +198,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="QueryAnalyzer.resx">
+      <DependentUpon>QueryAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ScheduleDatabaseBackup.resx">
       <DependentUpon>ScheduleDatabaseBackup.cs</DependentUpon>
     </EmbeddedResource>
