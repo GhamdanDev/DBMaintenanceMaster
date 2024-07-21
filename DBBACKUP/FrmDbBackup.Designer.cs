@@ -65,6 +65,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -72,15 +73,15 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnBackup = new System.Windows.Forms.Button();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.SuspendLayout();
             // 
             // Label21
@@ -490,6 +491,15 @@
             this.label10.TabIndex = 1391;
             this.label10.Text = "عدد الملفات";
             // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::DBBACKUP.Properties.Resources.info_30px;
+            this.pictureBox8.Location = new System.Drawing.Point(732, 261);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(37, 37);
+            this.pictureBox8.TabIndex = 1394;
+            this.pictureBox8.TabStop = false;
+            // 
             // pictureBox6
             // 
             this.pictureBox6.Image = global::DBBACKUP.Properties.Resources.search_database_30px;
@@ -561,14 +571,23 @@
             this.btnBackup.UseVisualStyleBackColor = false;
             this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
             // 
-            // pictureBox8
+            // button6
             // 
-            this.pictureBox8.Image = global::DBBACKUP.Properties.Resources.info_30px;
-            this.pictureBox8.Location = new System.Drawing.Point(732, 261);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(37, 37);
-            this.pictureBox8.TabIndex = 1394;
-            this.pictureBox8.TabStop = false;
+            this.button6.BackColor = System.Drawing.Color.SteelBlue;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MistyRose;
+            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MistyRose;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Location = new System.Drawing.Point(658, 1);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(111, 24);
+            this.button6.TabIndex = 1395;
+            this.button6.TabStop = false;
+            this.button6.Text = "التحكم الصوتي";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // FrmDbBackup
             // 
@@ -576,6 +595,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(984, 483);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.label10);
@@ -626,13 +646,13 @@
             this.Load += new System.EventHandler(this.FrmDbBackup_Load);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -688,5 +708,6 @@
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pictureBox8;
+        internal System.Windows.Forms.Button button6;
     }
 }

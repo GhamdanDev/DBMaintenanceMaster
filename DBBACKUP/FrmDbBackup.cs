@@ -4,7 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+ 
 namespace DBBACKUP
 {
     
@@ -476,6 +476,12 @@ namespace DBBACKUP
         private void Label7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SpeechRecognition speechRecognition = new SpeechRecognition();
+            speechRecognition.Show();
         }
     }
 
