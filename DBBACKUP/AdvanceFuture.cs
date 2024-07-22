@@ -298,5 +298,133 @@ ORDER BY
                 }
             }
         }
+        private void ExecuteUserDefinedFunctions()
+        {
+            string sqlQuery = @"
+    SELECT
+        o.name AS FunctionName,
+        o.type_desc AS FunctionType,
+        (SELECT
+             COUNT(*)
+         FROM
+             sys.sql_expression_dependencies sed
+         WHERE
+             sed.referencing_id = o.object_id) AS DependentObjectCount
+    FROM
+        sys.objects o
+    WHERE
+        o.type IN ('TF', 'IF', 'FN', 'FS', 'FT')
+    ORDER BY
+        DependentObjectCount DESC,
+        o.name;
+    ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable; // Assuming you have a DataGridView named dataGridView1 for displaying results
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
+        }
+        private void ExecuteUserDefinedFunctions2()
+        {
+            // نص الاستعلام لجلب قواعد البيانات
+            string getDatabasesQuery = @"
+    SELECT name
+    FROM sys.databases
+    WHERE name NOT IN ('master', 'tempdb', 'model', 'msdb')"; // استثناء قواعد البيانات النظامية
+
+            DataTable databasesTable = new DataTable();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(getDatabasesQuery, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(databasesTable);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while retrieving databases: {ex.Message}");
+                    return;
+                }
+            }
+
+            // إنشاء جدول لتخزين النتائج
+            DataTable allFunctionsTable = new DataTable();
+            allFunctionsTable.Columns.Add("DatabaseName", typeof(string));
+            allFunctionsTable.Columns.Add("FunctionName", typeof(string));
+            allFunctionsTable.Columns.Add("FunctionType", typeof(string));
+            allFunctionsTable.Columns.Add("DependentObjectCount", typeof(int));
+
+            // تنفيذ الاستعلام لكل قاعدة بيانات
+            foreach (DataRow dbRow in databasesTable.Rows)
+            {
+                string databaseName = dbRow["name"].ToString();
+                string sqlQuery = $@"
+        USE [{databaseName}];
+        SELECT
+            o.name AS FunctionName,
+            o.type_desc AS FunctionType,
+            (SELECT
+                 COUNT(*)
+             FROM
+                 sys.sql_expression_dependencies sed
+             WHERE
+                 sed.referencing_id = o.object_id) AS DependentObjectCount
+        FROM
+            sys.objects o
+        WHERE
+            o.type IN ('TF', 'IF', 'FN', 'FS', 'FT')
+        ORDER BY
+            DependentObjectCount DESC,
+            o.name;
+        ";
+
+                using (SqlConnection dbConnection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(sqlQuery, dbConnection);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dbFunctionsTable = new DataTable();
+
+                    try
+                    {
+                        dbConnection.Open();
+                        adapter.Fill(dbFunctionsTable);
+
+                        // إضافة قاعدة البيانات إلى نتائج الاستعلام
+                        foreach (DataRow row in dbFunctionsTable.Rows)
+                        {
+                            allFunctionsTable.Rows.Add(databaseName, row["FunctionName"], row["FunctionType"], row["DependentObjectCount"]);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred while retrieving functions from database {databaseName}: {ex.Message}");
+                    }
+                }
+            }
+
+            // عرض النتائج في DataGridView
+            dataGridView1.DataSource = allFunctionsTable;
+        }
+
+        private void button2UserDefinedFunctions_Click(object sender, EventArgs e)
+        {
+            ExecuteUserDefinedFunctions2();
+        }
     }
 }

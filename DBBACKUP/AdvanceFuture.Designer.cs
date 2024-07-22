@@ -38,6 +38,7 @@
             this.button2ExecuteTopIOQueries = new System.Windows.Forms.Button();
             this.button2FindLastModiedStoredProcedures = new System.Windows.Forms.Button();
             this.button2ActiveTransactions = new System.Windows.Forms.Button();
+            this.button2UserDefinedFunctions = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -121,11 +122,23 @@
             this.button2ActiveTransactions.UseVisualStyleBackColor = true;
             this.button2ActiveTransactions.Click += new System.EventHandler(this.ExecuteActiveTransactions);
             // 
+            // button2UserDefinedFunctions
+            // 
+            this.button2UserDefinedFunctions.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
+            this.button2UserDefinedFunctions.Location = new System.Drawing.Point(857, 22);
+            this.button2UserDefinedFunctions.Name = "button2UserDefinedFunctions";
+            this.button2UserDefinedFunctions.Size = new System.Drawing.Size(160, 27);
+            this.button2UserDefinedFunctions.TabIndex = 7;
+            this.button2UserDefinedFunctions.Text = "Defined Functions";
+            this.button2UserDefinedFunctions.UseVisualStyleBackColor = true;
+            this.button2UserDefinedFunctions.Click += new System.EventHandler(this.button2UserDefinedFunctions_Click);
+            // 
             // AdvanceFuture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 450);
+            this.Controls.Add(this.button2UserDefinedFunctions);
             this.Controls.Add(this.button2ActiveTransactions);
             this.Controls.Add(this.button2FindLastModiedStoredProcedures);
             this.Controls.Add(this.button2ExecuteTopIOQueries);
@@ -151,5 +164,6 @@
         private System.Windows.Forms.Button button2ExecuteTopIOQueries;
         private System.Windows.Forms.Button button2FindLastModiedStoredProcedures;
         private System.Windows.Forms.Button button2ActiveTransactions;
+        private System.Windows.Forms.Button button2UserDefinedFunctions;
     }
 }
