@@ -62,7 +62,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
@@ -75,6 +74,8 @@
             this.btnBackup = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -109,12 +110,12 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(925, 1);
+            this.btnClose.Location = new System.Drawing.Point(957, 1);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(63, 24);
+            this.btnClose.Size = new System.Drawing.Size(27, 24);
             this.btnClose.TabIndex = 1284;
             this.btnClose.TabStop = false;
-            this.btnClose.Text = "خروج                  ";
+            this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -165,7 +166,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label5.Location = new System.Drawing.Point(619, 45);
+            this.label5.Location = new System.Drawing.Point(618, 45);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(111, 17);
             this.label5.TabIndex = 1358;
@@ -369,7 +370,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(513, 0);
+            this.button2.Location = new System.Drawing.Point(464, 0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(154, 24);
             this.button2.TabIndex = 1376;
@@ -425,7 +426,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(414, 0);
+            this.button3.Location = new System.Drawing.Point(365, 0);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(106, 24);
             this.button3.TabIndex = 1382;
@@ -443,7 +444,7 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(304, 1);
+            this.button4.Location = new System.Drawing.Point(255, 1);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(104, 24);
             this.button4.TabIndex = 1383;
@@ -451,24 +452,6 @@
             this.button4.Text = "تشفير الملفات";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.SteelBlue;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MistyRose;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MistyRose;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(208, 1);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(104, 24);
-            this.button5.TabIndex = 1384;
-            this.button5.TabStop = false;
-            this.button5.Text = "صيانه القواعد";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // label4
             // 
@@ -581,7 +564,7 @@
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(658, 1);
+            this.button6.Location = new System.Drawing.Point(609, 1);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(111, 24);
             this.button6.TabIndex = 1395;
@@ -599,7 +582,7 @@
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(768, -2);
+            this.button7.Location = new System.Drawing.Point(706, 1);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(111, 24);
             this.button7.TabIndex = 1396;
@@ -608,12 +591,49 @@
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.SteelBlue;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MistyRose;
+            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MistyRose;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.ForeColor = System.Drawing.Color.White;
+            this.button8.Location = new System.Drawing.Point(805, 0);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(106, 24);
+            this.button8.TabIndex = 1397;
+            this.button8.TabStop = false;
+            this.button8.Text = "خصائص متقدمه";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.SteelBlue;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MistyRose;
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MistyRose;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.White;
+            this.button5.Location = new System.Drawing.Point(159, 1);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(104, 24);
+            this.button5.TabIndex = 1384;
+            this.button5.TabStop = false;
+            this.button5.Text = "صيانه القواعد";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // FrmDbBackup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(984, 483);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.Panel1);
@@ -718,7 +738,6 @@
         internal System.Windows.Forms.Label label8;
         internal System.Windows.Forms.Button button3;
         internal System.Windows.Forms.Button button4;
-        internal System.Windows.Forms.Button button5;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -730,5 +749,7 @@
         private System.Windows.Forms.PictureBox pictureBox8;
         internal System.Windows.Forms.Button button6;
         internal System.Windows.Forms.Button button7;
+        internal System.Windows.Forms.Button button8;
+        internal System.Windows.Forms.Button button5;
     }
 }

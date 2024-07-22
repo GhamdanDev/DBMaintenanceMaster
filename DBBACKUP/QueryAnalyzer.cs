@@ -38,10 +38,9 @@ namespace DBBACKUP
 
                 // Display the query plan
                 string sqlHandle = GetSqlHandle(query);
-                if (!string.IsNullOrEmpty(sqlHandle))
-                {
+                //if (!string.IsNullOrEmpty(sqlHandle){
                     DisplayQueryPlan(sqlHandle);
-                }
+                
             }
             catch (Exception ex)
             {
@@ -51,6 +50,8 @@ namespace DBBACKUP
 
         private void GetQueryStats(string query)
         {
+
+            MessageBox.Show($"from GetQueryStats  ");
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string sqlQuery = @"
@@ -95,6 +96,7 @@ namespace DBBACKUP
      */
         private string GetSqlHandle(string query)
         {
+            MessageBox.Show($"from GetSqlHandle");
             // تأكد من عدم وجود استعلامات فارغة
             if (string.IsNullOrWhiteSpace(query))
             {
@@ -128,31 +130,81 @@ namespace DBBACKUP
             }
         }
 
-        private void DisplayQueryPlan(string sqlHandle)
+        /*  private void DisplayQueryPlan(string sqlHandle)
+          {
+              MessageBox.Show($"from DisplayQueryPlan ");
+              using (SqlConnection connection = new SqlConnection(connectionString))
+              {
+                  string sqlQuery = @"
+                      SELECT deqp.query_plan
+                      FROM sys.dm_exec_query_stats AS deqs
+                      CROSS APPLY sys.dm_exec_query_plan(deqs.plan_handle) AS deqp
+                      WHERE deqs.sql_handle = @SqlHandle";
+
+                  SqlCommand command = new SqlCommand(sqlQuery, connection);
+                  command.Parameters.AddWithValue("@SqlHandle", sqlHandle);
+
+                  try
+                  {
+                      connection.Open();
+                      string queryPlan = command.ExecuteScalar()?.ToString();
+                      webBrowserPlan.DocumentText = queryPlan;
+                  }
+                  catch (Exception ex)
+                  {
+                      MessageBox.Show($"An error occurred: {ex.Message}");
+                  }
+              }
+          }
+  */
+    private void DisplayQueryPlan(string sqlHandle)
+{
+    MessageBox.Show($"from DisplayQueryPlan ");
+    using (SqlConnection connection = new SqlConnection(connectionString))
+    {
+        string sqlQuery = @"
+            SELECT deqp.query_plan
+            FROM sys.dm_exec_requests AS der
+            CROSS APPLY sys.dm_exec_query_plan(der.plan_handle) AS deqp
+            WHERE der.sql_handle = @SqlHandle";
+
+        SqlCommand command = new SqlCommand(sqlQuery, connection);
+        command.Parameters.AddWithValue("@SqlHandle", sqlHandle);
+
+        try
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            connection.Open();
+            string queryPlan = command.ExecuteScalar()?.ToString();
+
+            // تأكد من أن خطة الاستعلام ليست فارغة
+            if (string.IsNullOrEmpty(queryPlan))
             {
-                string sqlQuery = @"
-                    SELECT deqp.query_plan
-                    FROM sys.dm_exec_query_stats AS deqs
-                    CROSS APPLY sys.dm_exec_query_plan(deqs.plan_handle) AS deqp
-                    WHERE deqs.sql_handle = @SqlHandle";
-
-                SqlCommand command = new SqlCommand(sqlQuery, connection);
-                command.Parameters.AddWithValue("@SqlHandle", sqlHandle);
-
-                try
-                {
-                    connection.Open();
-                    string queryPlan = command.ExecuteScalar()?.ToString();
-                    webBrowserPlan.DocumentText = queryPlan;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred: {ex.Message}");
-                }
+                MessageBox.Show("Query plan is empty.");
+                return;
             }
+
+            // عرض محتوى خطة الاستعلام في MessageBox
+            MessageBox.Show(queryPlan);
+
+            // حفظ خطة الاستعلام إلى ملف للتحقق منها
+            System.IO.File.WriteAllText("queryPlan.xml", queryPlan);
+
+            // تحقق من أن خطة الاستعلام بصيغة XML
+            if (!queryPlan.StartsWith("<ShowPlanXML"))
+            {
+                MessageBox.Show("Query plan is not in XML format.");
+                return;
+            }
+
+            // عرض خطة الاستعلام في مستعرض الويب
+            webBrowserPlan.DocumentText = queryPlan;
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred: {ex.Message}");
+        }
+    }
+}
 
         private void dgvResults_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
