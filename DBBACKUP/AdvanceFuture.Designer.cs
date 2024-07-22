@@ -28,14 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button1 = new System.Windows.Forms.Button();
             this.btnExecuteDatabaseFileQuery = new System.Windows.Forms.Button();
             this.button2ExecuteTopIOQueries = new System.Windows.Forms.Button();
+            this.button2FindLastModiedStoredProcedures = new System.Windows.Forms.Button();
+            this.button2ActiveTransactions = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -50,16 +52,16 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(761, 66);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(390, 385);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
@@ -97,11 +99,35 @@
             this.button2ExecuteTopIOQueries.UseVisualStyleBackColor = true;
             this.button2ExecuteTopIOQueries.Click += new System.EventHandler(this.button2ExecuteTopIOQueries_Click);
             // 
+            // button2FindLastModiedStoredProcedures
+            // 
+            this.button2FindLastModiedStoredProcedures.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
+            this.button2FindLastModiedStoredProcedures.Location = new System.Drawing.Point(497, 22);
+            this.button2FindLastModiedStoredProcedures.Name = "button2FindLastModiedStoredProcedures";
+            this.button2FindLastModiedStoredProcedures.Size = new System.Drawing.Size(160, 27);
+            this.button2FindLastModiedStoredProcedures.TabIndex = 5;
+            this.button2FindLastModiedStoredProcedures.Text = "اخر اجراءت";
+            this.button2FindLastModiedStoredProcedures.UseVisualStyleBackColor = true;
+            this.button2FindLastModiedStoredProcedures.Click += new System.EventHandler(this.button2FindLastModiedStoredProcedures_Click);
+            // 
+            // button2ActiveTransactions
+            // 
+            this.button2ActiveTransactions.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
+            this.button2ActiveTransactions.Location = new System.Drawing.Point(663, 22);
+            this.button2ActiveTransactions.Name = "button2ActiveTransactions";
+            this.button2ActiveTransactions.Size = new System.Drawing.Size(160, 27);
+            this.button2ActiveTransactions.TabIndex = 6;
+            this.button2ActiveTransactions.Text = "Active Transactions";
+            this.button2ActiveTransactions.UseVisualStyleBackColor = true;
+            this.button2ActiveTransactions.Click += new System.EventHandler(this.ExecuteActiveTransactions);
+            // 
             // AdvanceFuture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 450);
+            this.Controls.Add(this.button2ActiveTransactions);
+            this.Controls.Add(this.button2FindLastModiedStoredProcedures);
             this.Controls.Add(this.button2ExecuteTopIOQueries);
             this.Controls.Add(this.btnExecuteDatabaseFileQuery);
             this.Controls.Add(this.button1);
@@ -109,6 +135,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "AdvanceFuture";
             this.Text = "AdvanceFuture";
+            this.Load += new System.EventHandler(this.AdvanceFuture_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
@@ -122,5 +149,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnExecuteDatabaseFileQuery;
         private System.Windows.Forms.Button button2ExecuteTopIOQueries;
+        private System.Windows.Forms.Button button2FindLastModiedStoredProcedures;
+        private System.Windows.Forms.Button button2ActiveTransactions;
     }
 }

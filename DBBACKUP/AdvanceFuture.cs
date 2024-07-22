@@ -206,6 +206,41 @@ namespace DBBACKUP
             }
         }
 
+     
+        private void FindLastModiedStoredProcedures()
+        {
+            string sqlQuery = @"
+   SELECT
+    name AS [Stored Procedure],
+    modify_date AS [Last Modified Date]
+FROM
+    sys.objects
+WHERE
+    type = 'P'
+    AND DATEDIFF(D, modify_date, GETDATE()) < 30 -- Change 30 to the number of days you want to go back
+ORDER BY
+    modify_date DESC;
+    ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             LoadData();
@@ -220,6 +255,48 @@ namespace DBBACKUP
         private void button2ExecuteTopIOQueries_Click(object sender, EventArgs e)
         {
             ExecuteTopIOQueries();
+        }
+
+        private void AdvanceFuture_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2FindLastModiedStoredProcedures_Click(object sender, EventArgs e)
+        {
+            FindLastModiedStoredProcedures();
+        }
+
+        private void ExecuteActiveTransactions(object sender, EventArgs e)
+        {
+            string sqlQuery = @"
+    SELECT
+        transaction_id,
+        name,
+        transaction_begin_time,
+        transaction_type,
+        transaction_state
+    FROM
+        sys.dm_tran_active_transactions;
+    ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable; // Assuming you have another DataGridView named dataGridView2
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
         }
     }
 }
