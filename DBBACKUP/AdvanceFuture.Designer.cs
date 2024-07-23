@@ -42,6 +42,7 @@
             this.button2ShowCurrentLocks = new System.Windows.Forms.Button();
             this.button2ShowQueryStats = new System.Windows.Forms.Button();
             this.button2ShowRowCountAggregates = new System.Windows.Forms.Button();
+            this.button2ShowBlockingHierarchy = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -163,17 +164,29 @@
             this.button2ShowRowCountAggregates.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
             this.button2ShowRowCountAggregates.Location = new System.Drawing.Point(221, 81);
             this.button2ShowRowCountAggregates.Name = "button2ShowRowCountAggregates";
-            this.button2ShowRowCountAggregates.Size = new System.Drawing.Size(137, 27);
+            this.button2ShowRowCountAggregates.Size = new System.Drawing.Size(205, 27);
             this.button2ShowRowCountAggregates.TabIndex = 10;
             this.button2ShowRowCountAggregates.Text = "إحصائيات الاستعلامات في الحجم";
             this.button2ShowRowCountAggregates.UseVisualStyleBackColor = true;
             this.button2ShowRowCountAggregates.Click += new System.EventHandler(this.button2ShowRowCountAggregates_Click);
+            // 
+            // button2ShowBlockingHierarchy
+            // 
+            this.button2ShowBlockingHierarchy.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
+            this.button2ShowBlockingHierarchy.Location = new System.Drawing.Point(445, 81);
+            this.button2ShowBlockingHierarchy.Name = "button2ShowBlockingHierarchy";
+            this.button2ShowBlockingHierarchy.Size = new System.Drawing.Size(205, 27);
+            this.button2ShowBlockingHierarchy.TabIndex = 11;
+            this.button2ShowBlockingHierarchy.Text = "تحليل التسلسل الهرمي للحظر";
+            this.button2ShowBlockingHierarchy.UseVisualStyleBackColor = true;
+            this.button2ShowBlockingHierarchy.Click += new System.EventHandler(this.button2ShowBlockingHierarchy_Click);
             // 
             // AdvanceFuture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 450);
+            this.Controls.Add(this.button2ShowBlockingHierarchy);
             this.Controls.Add(this.button2ShowRowCountAggregates);
             this.Controls.Add(this.button2ShowQueryStats);
             this.Controls.Add(this.button2ShowCurrentLocks);
@@ -207,5 +220,6 @@
         private System.Windows.Forms.Button button2ShowCurrentLocks;
         private System.Windows.Forms.Button button2ShowQueryStats;
         private System.Windows.Forms.Button button2ShowRowCountAggregates;
+        private System.Windows.Forms.Button button2ShowBlockingHierarchy;
     }
 }
