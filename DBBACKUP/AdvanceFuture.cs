@@ -240,6 +240,81 @@ ORDER BY
                 }
             }
         }
+        private void ShowCurrentLocks()
+        {
+            // النص الاستعلامي لجلب معلومات الأقفال
+            string sqlQuery = @"
+    SELECT
+        resource_type AS [Resource Type],
+        resource_database_id AS [Database ID],
+        resource_associated_entity_id AS [Entity ID],
+        request_mode AS [Request Mode],
+        request_type AS [Request Type],
+        request_status AS [Request Status],
+        request_session_id AS [Session ID]
+    FROM
+        sys.dm_tran_locks
+    WHERE
+        resource_type <> 'DATABASE'; -- استبعاد الأقفال على مستوى قاعدة البيانات
+    ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable; // Assuming you have a DataGridView named dataGridView1 for displaying results
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
+        }
+        private void ShowQueryStats()
+        {
+            // النص الاستعلامي لجلب إحصائيات الاستعلامات
+            string sqlQuery = @"
+    SELECT 
+        CONVERT(varchar(16), query_stats.query_hash, 1) AS Query_Hash,   
+        SUM(query_stats.total_worker_time) / SUM(query_stats.execution_count) AS Avg_CPU_Time,  
+        MIN(query_stats.statement_text) AS Sample_Statement_Text
+    FROM   
+        (SELECT QS.*,   
+        SUBSTRING(ST.text, (QS.statement_start_offset / 2) + 1,  
+        ((CASE statement_end_offset   
+            WHEN -1 THEN DATALENGTH(ST.text)  
+            ELSE QS.statement_end_offset END   
+                - QS.statement_start_offset) / 2) + 1) AS statement_text  
+         FROM sys.dm_exec_query_stats AS QS  
+         CROSS APPLY sys.dm_exec_sql_text(QS.sql_handle) AS ST) AS query_stats  
+    GROUP BY query_stats.query_hash  
+    ORDER BY 2 DESC;
+    ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable; // Assuming you have a DataGridView named dataGridView1 for displaying results
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -299,45 +374,6 @@ ORDER BY
             }
         }
         private void ExecuteUserDefinedFunctions()
-        {
-            string sqlQuery = @"
-    SELECT
-        o.name AS FunctionName,
-        o.type_desc AS FunctionType,
-        (SELECT
-             COUNT(*)
-         FROM
-             sys.sql_expression_dependencies sed
-         WHERE
-             sed.referencing_id = o.object_id) AS DependentObjectCount
-    FROM
-        sys.objects o
-    WHERE
-        o.type IN ('TF', 'IF', 'FN', 'FS', 'FT')
-    ORDER BY
-        DependentObjectCount DESC,
-        o.name;
-    ";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand(sqlQuery, connection);
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                DataTable dataTable = new DataTable();
-
-                try
-                {
-                    connection.Open();
-                    adapter.Fill(dataTable);
-                    dataGridView1.DataSource = dataTable; // Assuming you have a DataGridView named dataGridView1 for displaying results
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred: {ex.Message}");
-                }
-            }
-        }
-        private void ExecuteUserDefinedFunctions2()
         {
             // نص الاستعلام لجلب قواعد البيانات
             string getDatabasesQuery = @"
@@ -424,7 +460,17 @@ ORDER BY
 
         private void button2UserDefinedFunctions_Click(object sender, EventArgs e)
         {
-            ExecuteUserDefinedFunctions2();
+            ExecuteUserDefinedFunctions();
+        }
+
+        private void button2ShowCurrentLocks_Click(object sender, EventArgs e)
+        {
+            ShowCurrentLocks();
+        }
+
+        private void button2ShowQueryStats_Click(object sender, EventArgs e)
+        {
+            ShowQueryStats();
         }
     }
 }

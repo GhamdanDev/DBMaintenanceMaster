@@ -39,6 +39,8 @@
             this.button2FindLastModiedStoredProcedures = new System.Windows.Forms.Button();
             this.button2ActiveTransactions = new System.Windows.Forms.Button();
             this.button2UserDefinedFunctions = new System.Windows.Forms.Button();
+            this.button2ShowCurrentLocks = new System.Windows.Forms.Button();
+            this.button2ShowQueryStats = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -46,9 +48,9 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 66);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 132);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(731, 372);
+            this.dataGridView1.Size = new System.Drawing.Size(731, 306);
             this.dataGridView1.TabIndex = 0;
             // 
             // chart1
@@ -57,20 +59,20 @@
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(761, 66);
+            this.chart1.Location = new System.Drawing.Point(761, 132);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(390, 385);
+            this.chart1.Size = new System.Drawing.Size(390, 319);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
-            this.button1.Location = new System.Drawing.Point(11, 22);
+            this.button1.Location = new System.Drawing.Point(13, 22);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(137, 27);
             this.button1.TabIndex = 2;
@@ -81,7 +83,7 @@
             // btnExecuteDatabaseFileQuery
             // 
             this.btnExecuteDatabaseFileQuery.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
-            this.btnExecuteDatabaseFileQuery.Location = new System.Drawing.Point(165, 22);
+            this.btnExecuteDatabaseFileQuery.Location = new System.Drawing.Point(167, 22);
             this.btnExecuteDatabaseFileQuery.Name = "btnExecuteDatabaseFileQuery";
             this.btnExecuteDatabaseFileQuery.Size = new System.Drawing.Size(137, 27);
             this.btnExecuteDatabaseFileQuery.TabIndex = 3;
@@ -92,7 +94,7 @@
             // button2ExecuteTopIOQueries
             // 
             this.button2ExecuteTopIOQueries.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
-            this.button2ExecuteTopIOQueries.Location = new System.Drawing.Point(318, 22);
+            this.button2ExecuteTopIOQueries.Location = new System.Drawing.Point(320, 22);
             this.button2ExecuteTopIOQueries.Name = "button2ExecuteTopIOQueries";
             this.button2ExecuteTopIOQueries.Size = new System.Drawing.Size(160, 27);
             this.button2ExecuteTopIOQueries.TabIndex = 4;
@@ -103,7 +105,7 @@
             // button2FindLastModiedStoredProcedures
             // 
             this.button2FindLastModiedStoredProcedures.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
-            this.button2FindLastModiedStoredProcedures.Location = new System.Drawing.Point(497, 22);
+            this.button2FindLastModiedStoredProcedures.Location = new System.Drawing.Point(490, 21);
             this.button2FindLastModiedStoredProcedures.Name = "button2FindLastModiedStoredProcedures";
             this.button2FindLastModiedStoredProcedures.Size = new System.Drawing.Size(160, 27);
             this.button2FindLastModiedStoredProcedures.TabIndex = 5;
@@ -114,30 +116,54 @@
             // button2ActiveTransactions
             // 
             this.button2ActiveTransactions.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
-            this.button2ActiveTransactions.Location = new System.Drawing.Point(663, 22);
+            this.button2ActiveTransactions.Location = new System.Drawing.Point(665, 22);
             this.button2ActiveTransactions.Name = "button2ActiveTransactions";
             this.button2ActiveTransactions.Size = new System.Drawing.Size(160, 27);
             this.button2ActiveTransactions.TabIndex = 6;
-            this.button2ActiveTransactions.Text = "Active Transactions";
+            this.button2ActiveTransactions.Text = "المعاملات النشطه";
             this.button2ActiveTransactions.UseVisualStyleBackColor = true;
             this.button2ActiveTransactions.Click += new System.EventHandler(this.ExecuteActiveTransactions);
             // 
             // button2UserDefinedFunctions
             // 
             this.button2UserDefinedFunctions.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
-            this.button2UserDefinedFunctions.Location = new System.Drawing.Point(857, 22);
+            this.button2UserDefinedFunctions.Location = new System.Drawing.Point(831, 21);
             this.button2UserDefinedFunctions.Name = "button2UserDefinedFunctions";
             this.button2UserDefinedFunctions.Size = new System.Drawing.Size(160, 27);
             this.button2UserDefinedFunctions.TabIndex = 7;
-            this.button2UserDefinedFunctions.Text = "Defined Functions";
+            this.button2UserDefinedFunctions.Text = "دوال المستخدم ";
             this.button2UserDefinedFunctions.UseVisualStyleBackColor = true;
             this.button2UserDefinedFunctions.Click += new System.EventHandler(this.button2UserDefinedFunctions_Click);
+            // 
+            // button2ShowCurrentLocks
+            // 
+            this.button2ShowCurrentLocks.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
+            this.button2ShowCurrentLocks.Location = new System.Drawing.Point(1007, 22);
+            this.button2ShowCurrentLocks.Name = "button2ShowCurrentLocks";
+            this.button2ShowCurrentLocks.Size = new System.Drawing.Size(144, 27);
+            this.button2ShowCurrentLocks.TabIndex = 8;
+            this.button2ShowCurrentLocks.Text = "فحص تعارض الاقفال ";
+            this.button2ShowCurrentLocks.UseVisualStyleBackColor = true;
+            this.button2ShowCurrentLocks.Click += new System.EventHandler(this.button2ShowCurrentLocks_Click);
+            // 
+            // button2ShowQueryStats
+            // 
+            this.button2ShowQueryStats.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
+            this.button2ShowQueryStats.Location = new System.Drawing.Point(13, 81);
+            this.button2ShowQueryStats.Name = "button2ShowQueryStats";
+            this.button2ShowQueryStats.Size = new System.Drawing.Size(137, 27);
+            this.button2ShowQueryStats.TabIndex = 9;
+            this.button2ShowQueryStats.Text = "إحصائيات الاستعلامات ";
+            this.button2ShowQueryStats.UseVisualStyleBackColor = true;
+            this.button2ShowQueryStats.Click += new System.EventHandler(this.button2ShowQueryStats_Click);
             // 
             // AdvanceFuture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 450);
+            this.Controls.Add(this.button2ShowQueryStats);
+            this.Controls.Add(this.button2ShowCurrentLocks);
             this.Controls.Add(this.button2UserDefinedFunctions);
             this.Controls.Add(this.button2ActiveTransactions);
             this.Controls.Add(this.button2FindLastModiedStoredProcedures);
@@ -165,5 +191,7 @@
         private System.Windows.Forms.Button button2FindLastModiedStoredProcedures;
         private System.Windows.Forms.Button button2ActiveTransactions;
         private System.Windows.Forms.Button button2UserDefinedFunctions;
+        private System.Windows.Forms.Button button2ShowCurrentLocks;
+        private System.Windows.Forms.Button button2ShowQueryStats;
     }
 }
