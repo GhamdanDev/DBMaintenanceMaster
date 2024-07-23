@@ -41,6 +41,7 @@
             this.button2UserDefinedFunctions = new System.Windows.Forms.Button();
             this.button2ShowCurrentLocks = new System.Windows.Forms.Button();
             this.button2ShowQueryStats = new System.Windows.Forms.Button();
+            this.button2ShowRowCountAggregates = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -149,19 +150,31 @@
             // button2ShowQueryStats
             // 
             this.button2ShowQueryStats.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
-            this.button2ShowQueryStats.Location = new System.Drawing.Point(13, 81);
+            this.button2ShowQueryStats.Location = new System.Drawing.Point(12, 81);
             this.button2ShowQueryStats.Name = "button2ShowQueryStats";
-            this.button2ShowQueryStats.Size = new System.Drawing.Size(137, 27);
+            this.button2ShowQueryStats.Size = new System.Drawing.Size(198, 27);
             this.button2ShowQueryStats.TabIndex = 9;
-            this.button2ShowQueryStats.Text = "إحصائيات الاستعلامات ";
+            this.button2ShowQueryStats.Text = "إحصائيات الاستعلامات في الاداء";
             this.button2ShowQueryStats.UseVisualStyleBackColor = true;
             this.button2ShowQueryStats.Click += new System.EventHandler(this.button2ShowQueryStats_Click);
+            // 
+            // button2ShowRowCountAggregates
+            // 
+            this.button2ShowRowCountAggregates.Font = new System.Drawing.Font("Lucida Calligraphy", 10F, System.Drawing.FontStyle.Bold);
+            this.button2ShowRowCountAggregates.Location = new System.Drawing.Point(221, 81);
+            this.button2ShowRowCountAggregates.Name = "button2ShowRowCountAggregates";
+            this.button2ShowRowCountAggregates.Size = new System.Drawing.Size(137, 27);
+            this.button2ShowRowCountAggregates.TabIndex = 10;
+            this.button2ShowRowCountAggregates.Text = "إحصائيات الاستعلامات في الحجم";
+            this.button2ShowRowCountAggregates.UseVisualStyleBackColor = true;
+            this.button2ShowRowCountAggregates.Click += new System.EventHandler(this.button2ShowRowCountAggregates_Click);
             // 
             // AdvanceFuture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 450);
+            this.Controls.Add(this.button2ShowRowCountAggregates);
             this.Controls.Add(this.button2ShowQueryStats);
             this.Controls.Add(this.button2ShowCurrentLocks);
             this.Controls.Add(this.button2UserDefinedFunctions);
@@ -193,5 +206,6 @@
         private System.Windows.Forms.Button button2UserDefinedFunctions;
         private System.Windows.Forms.Button button2ShowCurrentLocks;
         private System.Windows.Forms.Button button2ShowQueryStats;
+        private System.Windows.Forms.Button button2ShowRowCountAggregates;
     }
 }

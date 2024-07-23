@@ -315,6 +315,49 @@ ORDER BY
                 }
             }
         }
+        private void ShowRowCountAggregates()
+        {
+            // النص الاستعلامي لجلب المعلومات التجميعية لعدد الصفوف
+            string sqlQuery = @"
+SELECT qs.execution_count,
+    SUBSTRING(qt.text, qs.statement_start_offset/2 + 1,
+                 (CASE 
+                      WHEN qs.statement_end_offset = -1
+                      THEN LEN(CONVERT(nvarchar(max), qt.text)) * 2
+                      ELSE qs.statement_end_offset - qs.statement_start_offset
+                 END) / 2
+             ) AS query_text,
+    qt.dbid,
+    DB_NAME(qt.dbid) AS dbname,
+    qt.objectid,
+    qs.total_rows,
+    qs.last_rows,
+    qs.min_rows,
+    qs.max_rows
+FROM sys.dm_exec_query_stats AS qs
+CROSS APPLY sys.dm_exec_sql_text(qs.sql_handle) AS qt
+WHERE qt.text LIKE '%SELECT%'
+ORDER BY qs.execution_count DESC;
+    ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable; // Assuming you have a DataGridView named dataGridView1 for displaying results
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -471,6 +514,11 @@ ORDER BY
         private void button2ShowQueryStats_Click(object sender, EventArgs e)
         {
             ShowQueryStats();
+        }
+
+        private void button2ShowRowCountAggregates_Click(object sender, EventArgs e)
+        {
+            ShowRowCountAggregates();
         }
     }
 }
