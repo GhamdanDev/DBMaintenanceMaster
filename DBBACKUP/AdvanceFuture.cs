@@ -588,5 +588,10 @@ ORDER BY qs.execution_count DESC;
         {
             ShowBlockingHierarchy();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

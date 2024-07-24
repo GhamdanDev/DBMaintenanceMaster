@@ -478,7 +478,292 @@ namespace DBBACKUP
                 }
             }
         }
+        /*  private void CreateDatabaseAudit(string databaseName, string auditPath)
+          {
+              string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True;";
+              using (SqlConnection conn = new SqlConnection(connectionString))
+              {
+                  try
+                  {
+                      conn.Open();
+                      using (SqlCommand useDbCmd = new SqlCommand($"USE {databaseName}", conn))
+                      {
+                          useDbCmd.ExecuteNonQuery();
+                      }
 
+                      string createDirSql = "EXEC master.sys.xp_create_subdir @path";
+                      using (SqlCommand cmd = new SqlCommand(createDirSql, conn))
+                      {
+                          cmd.Parameters.AddWithValue("@path", auditPath);
+                          cmd.ExecuteNonQuery();
+                      }
+
+                      string auditSql = @"
+  USE master;
+  CREATE SERVER AUDIT [" + databaseName + @"] 
+  TO FILE ( FILEPATH = @AuditPath, MAXSIZE = 1GB, MAX_ROLLOVER_FILES = 15, RESERVE_DISK_SPACE = OFF ) 
+  WITH ( QUEUE_DELAY = 1000 );
+  ALTER SERVER AUDIT [" + databaseName + @"] WITH (STATE = ON);
+  USE [" + databaseName + @"];
+  CREATE DATABASE AUDIT SPECIFICATION [" + databaseName + @"]
+  FOR SERVER AUDIT [" + databaseName + @"]
+  ADD (SCHEMA_OBJECT_ACCESS_GROUP) WITH (STATE = ON);
+  ";
+
+                      using (SqlCommand cmd = new SqlCommand(auditSql, conn))
+                      {
+                          cmd.Parameters.AddWithValue("@AuditPath", auditPath);
+                          cmd.ExecuteNonQuery();
+                      }
+
+                      MessageBox.Show("Database audit created successfully!");
+                  }
+                  catch (Exception ex)
+                  {
+                      //MessageBox.Show("An error occurred while creating database audit: " + ex.Message);
+                      ShowErrorMessage("An error occurred while creating database audit: " + ex.Message);
+
+                  }
+              }
+          }
+  */
+
+
+        private void CreateDatabaseAudit(string databaseName, string auditPath)
+        {
+            string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    // إنشاء مجلد مسار التدقيق
+                    string createDirSql = "EXEC master.sys.xp_create_subdir @path";
+                    using (SqlCommand cmd = new SqlCommand(createDirSql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@path", auditPath);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // إنشاء تدقيق على مستوى الخادم
+                    string createServerAuditSql = @"
+CREATE SERVER AUDIT [" + databaseName + @"] 
+TO FILE ( FILEPATH = '" + auditPath + @"', MAXSIZE = 1GB, MAX_ROLLOVER_FILES = 15, RESERVE_DISK_SPACE = OFF ) 
+WITH ( QUEUE_DELAY = 1000, ON_FAILURE = SHUTDOWN );
+ALTER SERVER AUDIT [" + databaseName + @"] WITH (STATE = ON);";
+                    using (SqlCommand cmd = new SqlCommand(createServerAuditSql, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // استخدام قاعدة البيانات المستهدفة
+                    using (SqlCommand useDbCmd = new SqlCommand($"USE {databaseName}", conn))
+                    {
+                        useDbCmd.ExecuteNonQuery();
+                    }
+
+                    // إنشاء تدقيق على مستوى قاعدة البيانات
+                    string createDatabaseAuditSql = @"
+CREATE DATABASE AUDIT SPECIFICATION [" + databaseName + @"]
+FOR SERVER AUDIT [" + databaseName + @"]
+ADD (SCHEMA_OBJECT_ACCESS_GROUP) WITH (STATE = ON);";
+                    using (SqlCommand cmd = new SqlCommand(createDatabaseAuditSql, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("Database audit created successfully!");
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorMessage("An error occurred while creating database audit: " + ex.Message);
+                }
+            }
+        }
+
+        /*    private void DisplayAuditData(string auditFilePath)
+            {
+                string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True;";
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        conn.Open();
+
+                        string query = @"
+    SELECT *
+    FROM sys.fn_get_audit_file(@auditFilePath, DEFAULT, DEFAULT);";
+
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@auditFilePath", auditFilePath);
+                            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                            DataTable dataTable = new DataTable();
+
+                            try
+                            {
+                                adapter.Fill(dataTable);
+
+                                // Check if dataTable contains any rows
+                                if (dataTable.Rows.Count == 0)
+                                {
+                                    // Display message if no data is found
+                                    MessageBox.Show("No data found in the audit file.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    dataGridView1.DataSource = null; // Clear DataGridView if no data
+                                }
+                                else
+                                {
+                                    // Display data if available
+                                    dataGridView1.DataSource = dataTable;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                // If there is an error while filling the DataTable
+                                ShowErrorMessage("An error occurred while processing audit data: " + ex.Message);
+                                dataGridView1.DataSource = null; // Clear DataGridView in case of error
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowErrorMessage("An error occurred while fetching audit data: " + ex.Message);
+                        dataGridView1.DataSource = null; // Clear DataGridView in case of error
+                    }
+                }
+            }
+    */
+
+
+        private void DisplayAuditData(string auditFilePath)
+        {
+            string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string query = @"
+SELECT *
+FROM sys.fn_get_audit_file(@auditFilePath, DEFAULT, DEFAULT);";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@auditFilePath", auditFilePath);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dataTable = new DataTable();
+
+                        try
+                        {
+                            adapter.Fill(dataTable);
+
+                            // Check if dataTable contains any rows
+                            if (dataTable.Rows.Count == 0)
+                            {
+                                // Display message if no data is found
+                                MessageBox.Show("No data found in the audit file.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                dataGridView1.DataSource = null; // Clear DataGridView if no data
+                            }
+                            else
+                            {
+                                // Create a new DataTable to hold the displayable data
+                                DataTable displayTable = dataTable.Clone();
+
+                                // Convert byte array columns to string for display
+                                foreach (DataColumn column in dataTable.Columns)
+                                {
+                                    if (column.DataType == typeof(byte[]))
+                                    {
+                                        displayTable.Columns[column.ColumnName].DataType = typeof(string);
+                                    }
+                                }
+
+                                // Copy and convert data from original table to display table
+                                foreach (DataRow row in dataTable.Rows)
+                                {
+                                    DataRow newRow = displayTable.NewRow();
+                                    foreach (DataColumn column in dataTable.Columns)
+                                    {
+                                        if (column.DataType == typeof(byte[]))
+                                        {
+                                            // Check for DBNull before conversion
+                                            if (row[column] == DBNull.Value)
+                                            {
+                                                newRow[column.ColumnName] = DBNull.Value;
+                                            }
+                                            else
+                                            {
+                                                newRow[column.ColumnName] = BitConverter.ToString((byte[])row[column]);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            newRow[column.ColumnName] = row[column];
+                                        }
+                                    }
+                                    displayTable.Rows.Add(newRow);
+                                }
+
+                                // Display the data in the DataGridView
+                                dataGridView1.DataSource = displayTable;
+                            }
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            // If there is an SQL specific error
+                            ShowErrorMessage("An SQL error occurred while processing audit data: " + sqlEx.Message);
+                            dataGridView1.DataSource = null; // Clear DataGridView in case of error
+                        }
+                        catch (Exception ex)
+                        {
+                            // If there is a general error while filling the DataTable
+                            ShowErrorMessage("An error occurred while processing audit data: " + ex.Message);
+                            dataGridView1.DataSource = null; // Clear DataGridView in case of error
+                        }
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    // If there is an SQL specific error
+                    ShowErrorMessage("An SQL error occurred while fetching audit data: " + sqlEx.Message);
+                    dataGridView1.DataSource = null; // Clear DataGridView in case of error
+                }
+                catch (Exception ex)
+                {
+                    // If there is a general error while connecting to the database
+                    ShowErrorMessage("An error occurred while fetching audit data: " + ex.Message);
+                    dataGridView1.DataSource = null; // Clear DataGridView in case of error
+                }
+            }
+        }
+
+
+        private void ShowErrorMessage(string message)
+        {
+            Form errorForm = new Form
+            {
+                Text = "Error",
+                Width = 600,
+                Height = 400,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+
+            TextBox textBox = new TextBox
+            {
+                Multiline = true,
+                ReadOnly = true,
+                Dock = DockStyle.Fill,
+                Text = message,
+                ScrollBars = ScrollBars.Vertical
+            };
+
+            errorForm.Controls.Add(textBox);
+            errorForm.ShowDialog();
+        }
+
+       
         private void SHRINKFILE(string databaseName)
         {
             // استبدل قيمة connectionString بقيمة الاتصال بقاعدة البيانات الخاصة بك
@@ -578,6 +863,34 @@ namespace DBBACKUP
         private void pictureBox4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnCreateAudit_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+            {
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string auditPath = folderBrowserDialog.SelectedPath;
+                    string databaseName = ComboBoxDatabaseName.Text; // أو الحصول على اسم قاعدة البيانات من واجهة المستخدم
+                    CreateDatabaseAudit(databaseName, auditPath);
+                }
+            }
+        }
+
+        private void btnDisplayAuditData_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "SQL Audit Files (*.sqlaudit)|*.sqlaudit|All Files (*.*)|*.*";
+                openFileDialog.Title = "Select an Audit File";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string auditFilePath = openFileDialog.FileName;
+                    DisplayAuditData(auditFilePath);
+                }
+            }
         }
     }
 

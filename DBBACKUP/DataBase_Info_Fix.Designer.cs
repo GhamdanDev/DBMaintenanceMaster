@@ -40,27 +40,33 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1CreateIndexes = new System.Windows.Forms.Button();
+            this.BtnCreateAudit = new System.Windows.Forms.Button();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.button1CreateIndexes = new System.Windows.Forms.Button();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.btnDisplayAuditData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.SuspendLayout();
             // 
             // ComboBoxDatabaseName
@@ -160,6 +166,64 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("NSimSun", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(1161, 460);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 18);
+            this.label1.TabIndex = 31;
+            this.label1.Text = "احصائيات";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(271, 93);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(124, 34);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "إعادة بناء الفهارس";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1CreateIndexes
+            // 
+            this.button1CreateIndexes.Location = new System.Drawing.Point(486, 93);
+            this.button1CreateIndexes.Name = "button1CreateIndexes";
+            this.button1CreateIndexes.Size = new System.Drawing.Size(124, 34);
+            this.button1CreateIndexes.TabIndex = 13;
+            this.button1CreateIndexes.Text = "انشاء فهارس";
+            this.button1CreateIndexes.UseVisualStyleBackColor = true;
+            this.button1CreateIndexes.Click += new System.EventHandler(this.button1CreateIndexes_Click);
+            // 
+            // BtnCreateAudit
+            // 
+            this.BtnCreateAudit.Location = new System.Drawing.Point(64, 147);
+            this.BtnCreateAudit.Name = "BtnCreateAudit";
+            this.BtnCreateAudit.Size = new System.Drawing.Size(124, 34);
+            this.BtnCreateAudit.TabIndex = 33;
+            this.BtnCreateAudit.Text = "تفعيل المراقب";
+            this.BtnCreateAudit.UseVisualStyleBackColor = true;
+            this.BtnCreateAudit.Click += new System.EventHandler(this.BtnCreateAudit_Click);
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
+            this.pictureBox9.Location = new System.Drawing.Point(194, 151);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(47, 30);
+            this.pictureBox9.TabIndex = 34;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::DBBACKUP.Properties.Resources.add_list_30px;
+            this.pictureBox4.Location = new System.Drawing.Point(628, 93);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(47, 34);
+            this.pictureBox4.TabIndex = 32;
+            this.pictureBox4.TabStop = false;
+            // 
             // pictureBox8
             // 
             this.pictureBox8.Image = global::DBBACKUP.Properties.Resources.web_analytics_100px;
@@ -186,6 +250,15 @@
             this.pictureBox6.Size = new System.Drawing.Size(36, 39);
             this.pictureBox6.TabIndex = 25;
             this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::DBBACKUP.Properties.Resources.to_do_30px;
+            this.pictureBox5.Location = new System.Drawing.Point(401, 93);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(47, 34);
+            this.pictureBox5.TabIndex = 24;
+            this.pictureBox5.TabStop = false;
             // 
             // pictureBox3
             // 
@@ -214,59 +287,34 @@
             this.pictureBox2.TabIndex = 21;
             this.pictureBox2.TabStop = false;
             // 
-            // label1
+            // pictureBox10
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("NSimSun", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1161, 460);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 18);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "احصائيات";
+            this.pictureBox10.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
+            this.pictureBox10.Location = new System.Drawing.Point(401, 155);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(47, 30);
+            this.pictureBox10.TabIndex = 36;
+            this.pictureBox10.TabStop = false;
             // 
-            // button2
+            // btnDisplayAuditData
             // 
-            this.button2.Location = new System.Drawing.Point(271, 93);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 34);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "إعادة بناء الفهارس";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::DBBACKUP.Properties.Resources.to_do_30px;
-            this.pictureBox5.Location = new System.Drawing.Point(401, 93);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(47, 34);
-            this.pictureBox5.TabIndex = 24;
-            this.pictureBox5.TabStop = false;
-            // 
-            // button1CreateIndexes
-            // 
-            this.button1CreateIndexes.Location = new System.Drawing.Point(486, 93);
-            this.button1CreateIndexes.Name = "button1CreateIndexes";
-            this.button1CreateIndexes.Size = new System.Drawing.Size(124, 34);
-            this.button1CreateIndexes.TabIndex = 13;
-            this.button1CreateIndexes.Text = "انشاء فهارس";
-            this.button1CreateIndexes.UseVisualStyleBackColor = true;
-            this.button1CreateIndexes.Click += new System.EventHandler(this.button1CreateIndexes_Click);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::DBBACKUP.Properties.Resources.add_list_30px;
-            this.pictureBox4.Location = new System.Drawing.Point(628, 93);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(47, 34);
-            this.pictureBox4.TabIndex = 32;
-            this.pictureBox4.TabStop = false;
+            this.btnDisplayAuditData.Location = new System.Drawing.Point(271, 151);
+            this.btnDisplayAuditData.Name = "btnDisplayAuditData";
+            this.btnDisplayAuditData.Size = new System.Drawing.Size(124, 34);
+            this.btnDisplayAuditData.TabIndex = 35;
+            this.btnDisplayAuditData.Text = "عرض بيانات المراقب";
+            this.btnDisplayAuditData.UseVisualStyleBackColor = true;
+            this.btnDisplayAuditData.Click += new System.EventHandler(this.btnDisplayAuditData_Click);
             // 
             // DataBase_Info_Fix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1348, 709);
+            this.Controls.Add(this.pictureBox10);
+            this.Controls.Add(this.btnDisplayAuditData);
+            this.Controls.Add(this.pictureBox9);
+            this.Controls.Add(this.BtnCreateAudit);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox8);
@@ -295,14 +343,16 @@
             this.Load += new System.EventHandler(this.DataBase_Info_Fix_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,5 +382,9 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Button button1CreateIndexes;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.Button BtnCreateAudit;
+        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.Button btnDisplayAuditData;
     }
 }

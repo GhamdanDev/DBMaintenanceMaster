@@ -496,6 +496,12 @@ namespace DBBACKUP
             AdvanceFuture advanceFuture = new AdvanceFuture();
             advanceFuture.Show();
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            ErrorMessagesChatGPT errorMessagesChatGPT = new ErrorMessagesChatGPT();
+            errorMessagesChatGPT.Show();
+        }
     }
 
 
