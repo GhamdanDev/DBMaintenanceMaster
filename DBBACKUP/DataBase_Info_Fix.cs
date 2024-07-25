@@ -793,6 +793,46 @@ FROM sys.fn_get_audit_file(@auditFilePath, DEFAULT, DEFAULT);";
                 }
             }
         }
+      
+          private void LoadDatabaseUsageStats()
+        {
+            string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True;";
+
+            string query = @"
+        SELECT d.name AS DBname,
+               LastUserAccess =
+               (
+                   SELECT LastUserAccess = MAX(a.xx)
+                   FROM
+                   (
+                       SELECT xx = MAX(last_user_seek)
+                       WHERE MAX(last_user_seek) IS NOT NULL
+                       UNION
+                       SELECT xx = MAX(last_user_scan)
+                       WHERE MAX(last_user_scan) IS NOT NULL
+                       UNION
+                       SELECT xx = MAX(last_user_lookup)
+                       WHERE MAX(last_user_lookup) IS NOT NULL
+                       UNION
+                       SELECT xx = MAX(last_user_update)
+                       WHERE MAX(last_user_update) IS NOT NULL
+                   ) a
+               )
+        FROM master.dbo.sysdatabases d
+            LEFT OUTER JOIN sys.dm_db_index_usage_stats s
+                ON d.dbid = s.database_id
+        WHERE d.dbid > 4
+        GROUP BY d.name
+        ORDER BY LastUserAccess;";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            dataGridView1.DataSource = dataTable;
+        }
+    }
         private void InfoOfDBTables(string databaseName)
         {
             // استبدل قيمة connectionString بقيمة الاتصال بقاعدة البيانات الخاصة بك
@@ -880,15 +920,27 @@ FROM sys.fn_get_audit_file(@auditFilePath, DEFAULT, DEFAULT);";
 
         private void btnDisplayAuditData_Click(object sender, EventArgs e)
         {
+            
+
+        }
+
+        private void button5Lastuseraccesstodatabase_Click(object sender, EventArgs e)
+        {
+            LoadDatabaseUsageStats();
+        }
+
+        private void btnDisplayAuditData_Click_1(object sender, EventArgs e)
+        {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "SQL Audit Files (*.sqlaudit)|*.sqlaudit|All Files (*.*)|*.*";
-                openFileDialog.Title = "Select an Audit File";
+                openFileDialog.Title = "اختيار ملف تدقيق";
+                openFileDialog.Filter = "ملفات التدقيق (*.sqlaudit)|*.sqlaudit|جميع الملفات (*.*)|*.*"; // يمكنك تعديل الفلتر حسب نوع الملفات المطلوبة
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string auditFilePath = openFileDialog.FileName;
-                    DisplayAuditData(auditFilePath);
+                    string auditFilePath = openFileDialog.FileName; // الحصول على مسار الملف الذي تم اختياره
+                    string databaseName = ComboBoxDatabaseName.Text; // أو الحصول على اسم قاعدة البيانات من واجهة المستخدم
+                    DisplayAuditData(auditFilePath); // تمرير مسار الملف إلى الدالة
                 }
             }
         }

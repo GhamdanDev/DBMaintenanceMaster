@@ -44,6 +44,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1CreateIndexes = new System.Windows.Forms.Button();
             this.BtnCreateAudit = new System.Windows.Forms.Button();
+            this.btnDisplayAuditData = new System.Windows.Forms.Button();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
@@ -53,10 +55,11 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.btnDisplayAuditData = new System.Windows.Forms.Button();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.button5Lastuseraccesstodatabase = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -66,7 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.SuspendLayout();
             // 
             // ComboBoxDatabaseName
@@ -206,6 +209,25 @@
             this.BtnCreateAudit.UseVisualStyleBackColor = true;
             this.BtnCreateAudit.Click += new System.EventHandler(this.BtnCreateAudit_Click);
             // 
+            // btnDisplayAuditData
+            // 
+            this.btnDisplayAuditData.Location = new System.Drawing.Point(271, 151);
+            this.btnDisplayAuditData.Name = "btnDisplayAuditData";
+            this.btnDisplayAuditData.Size = new System.Drawing.Size(124, 34);
+            this.btnDisplayAuditData.TabIndex = 35;
+            this.btnDisplayAuditData.Text = "عرض بيانات المراقب";
+            this.btnDisplayAuditData.UseVisualStyleBackColor = true;
+            this.btnDisplayAuditData.Click += new System.EventHandler(this.btnDisplayAuditData_Click_1);
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
+            this.pictureBox10.Location = new System.Drawing.Point(401, 155);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(47, 30);
+            this.pictureBox10.TabIndex = 36;
+            this.pictureBox10.TabStop = false;
+            // 
             // pictureBox9
             // 
             this.pictureBox9.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
@@ -287,30 +309,32 @@
             this.pictureBox2.TabIndex = 21;
             this.pictureBox2.TabStop = false;
             // 
-            // pictureBox10
+            // pictureBox11
             // 
-            this.pictureBox10.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
-            this.pictureBox10.Location = new System.Drawing.Point(401, 155);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(47, 30);
-            this.pictureBox10.TabIndex = 36;
-            this.pictureBox10.TabStop = false;
+            this.pictureBox11.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
+            this.pictureBox11.Location = new System.Drawing.Point(616, 155);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(47, 30);
+            this.pictureBox11.TabIndex = 38;
+            this.pictureBox11.TabStop = false;
             // 
-            // btnDisplayAuditData
+            // button5Lastuseraccesstodatabase
             // 
-            this.btnDisplayAuditData.Location = new System.Drawing.Point(271, 151);
-            this.btnDisplayAuditData.Name = "btnDisplayAuditData";
-            this.btnDisplayAuditData.Size = new System.Drawing.Size(124, 34);
-            this.btnDisplayAuditData.TabIndex = 35;
-            this.btnDisplayAuditData.Text = "عرض بيانات المراقب";
-            this.btnDisplayAuditData.UseVisualStyleBackColor = true;
-            this.btnDisplayAuditData.Click += new System.EventHandler(this.btnDisplayAuditData_Click);
+            this.button5Lastuseraccesstodatabase.Location = new System.Drawing.Point(476, 151);
+            this.button5Lastuseraccesstodatabase.Name = "button5Lastuseraccesstodatabase";
+            this.button5Lastuseraccesstodatabase.Size = new System.Drawing.Size(134, 34);
+            this.button5Lastuseraccesstodatabase.TabIndex = 37;
+            this.button5Lastuseraccesstodatabase.Text = " آخر وصول إلى القواعد";
+            this.button5Lastuseraccesstodatabase.UseVisualStyleBackColor = true;
+            this.button5Lastuseraccesstodatabase.Click += new System.EventHandler(this.button5Lastuseraccesstodatabase_Click);
             // 
             // DataBase_Info_Fix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1348, 709);
+            this.Controls.Add(this.pictureBox11);
+            this.Controls.Add(this.button5Lastuseraccesstodatabase);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.btnDisplayAuditData);
             this.Controls.Add(this.pictureBox9);
@@ -343,6 +367,7 @@
             this.Load += new System.EventHandler(this.DataBase_Info_Fix_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -352,7 +377,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,5 +411,7 @@
         private System.Windows.Forms.Button BtnCreateAudit;
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.Button btnDisplayAuditData;
+        private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.Button button5Lastuseraccesstodatabase;
     }
 }
