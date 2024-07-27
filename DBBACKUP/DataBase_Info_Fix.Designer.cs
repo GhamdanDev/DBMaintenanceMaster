@@ -55,6 +55,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnDatabaseExtendedProperties = new System.Windows.Forms.Button();
+            this.btnSetOnline = new System.Windows.Forms.Button();
+            this.btnSetOffline = new System.Windows.Forms.Button();
+            this.pictureBox17 = new System.Windows.Forms.PictureBox();
+            this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
@@ -70,8 +74,12 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.panel1DBstate = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
@@ -108,7 +116,7 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Location = new System.Drawing.Point(21, 191);
+            this.dataGridView1.Location = new System.Drawing.Point(20, 235);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1071, 193);
             this.dataGridView1.TabIndex = 30;
@@ -151,14 +159,14 @@
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Location = new System.Drawing.Point(0, 35);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 23);
             this.label4.TabIndex = 29;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(62, 93);
+            this.button1.Location = new System.Drawing.Point(62, 128);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 34);
             this.button1.TabIndex = 16;
@@ -168,7 +176,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(722, 95);
+            this.button3.Location = new System.Drawing.Point(722, 130);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(124, 34);
             this.button3.TabIndex = 18;
@@ -178,7 +186,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(926, 93);
+            this.button4.Location = new System.Drawing.Point(926, 128);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(124, 34);
             this.button4.TabIndex = 19;
@@ -198,7 +206,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(271, 93);
+            this.button2.Location = new System.Drawing.Point(271, 128);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(124, 34);
             this.button2.TabIndex = 17;
@@ -208,7 +216,7 @@
             // 
             // button1CreateIndexes
             // 
-            this.button1CreateIndexes.Location = new System.Drawing.Point(486, 93);
+            this.button1CreateIndexes.Location = new System.Drawing.Point(486, 128);
             this.button1CreateIndexes.Name = "button1CreateIndexes";
             this.button1CreateIndexes.Size = new System.Drawing.Size(124, 34);
             this.button1CreateIndexes.TabIndex = 13;
@@ -218,7 +226,7 @@
             // 
             // BtnCreateAudit
             // 
-            this.BtnCreateAudit.Location = new System.Drawing.Point(64, 147);
+            this.BtnCreateAudit.Location = new System.Drawing.Point(64, 182);
             this.BtnCreateAudit.Name = "BtnCreateAudit";
             this.BtnCreateAudit.Size = new System.Drawing.Size(124, 34);
             this.BtnCreateAudit.TabIndex = 33;
@@ -228,7 +236,7 @@
             // 
             // btnDisplayAuditData
             // 
-            this.btnDisplayAuditData.Location = new System.Drawing.Point(271, 151);
+            this.btnDisplayAuditData.Location = new System.Drawing.Point(271, 186);
             this.btnDisplayAuditData.Name = "btnDisplayAuditData";
             this.btnDisplayAuditData.Size = new System.Drawing.Size(124, 34);
             this.btnDisplayAuditData.TabIndex = 35;
@@ -238,7 +246,7 @@
             // 
             // button5Lastuseraccesstodatabase
             // 
-            this.button5Lastuseraccesstodatabase.Location = new System.Drawing.Point(489, 151);
+            this.button5Lastuseraccesstodatabase.Location = new System.Drawing.Point(489, 186);
             this.button5Lastuseraccesstodatabase.Name = "button5Lastuseraccesstodatabase";
             this.button5Lastuseraccesstodatabase.Size = new System.Drawing.Size(134, 34);
             this.button5Lastuseraccesstodatabase.TabIndex = 37;
@@ -249,14 +257,14 @@
             // cbNewCollation
             // 
             this.cbNewCollation.FormattingEnabled = true;
-            this.cbNewCollation.Location = new System.Drawing.Point(62, 12);
+            this.cbNewCollation.Location = new System.Drawing.Point(62, 47);
             this.cbNewCollation.Name = "cbNewCollation";
             this.cbNewCollation.Size = new System.Drawing.Size(333, 21);
             this.cbNewCollation.TabIndex = 39;
             // 
             // btnApplyCollation
             // 
-            this.btnApplyCollation.Location = new System.Drawing.Point(62, 39);
+            this.btnApplyCollation.Location = new System.Drawing.Point(62, 74);
             this.btnApplyCollation.Name = "btnApplyCollation";
             this.btnApplyCollation.Size = new System.Drawing.Size(291, 34);
             this.btnApplyCollation.TabIndex = 40;
@@ -266,7 +274,7 @@
             // 
             // btnCheckFiles
             // 
-            this.btnCheckFiles.Location = new System.Drawing.Point(558, 35);
+            this.btnCheckFiles.Location = new System.Drawing.Point(558, 70);
             this.btnCheckFiles.Name = "btnCheckFiles";
             this.btnCheckFiles.Size = new System.Drawing.Size(63, 34);
             this.btnCheckFiles.TabIndex = 42;
@@ -276,7 +284,7 @@
             // 
             // btnFixFiles
             // 
-            this.btnFixFiles.Location = new System.Drawing.Point(489, 35);
+            this.btnFixFiles.Location = new System.Drawing.Point(489, 70);
             this.btnFixFiles.Name = "btnFixFiles";
             this.btnFixFiles.Size = new System.Drawing.Size(63, 34);
             this.btnFixFiles.TabIndex = 44;
@@ -286,7 +294,7 @@
             // 
             // btnFixPhysicalFiles
             // 
-            this.btnFixPhysicalFiles.Location = new System.Drawing.Point(720, 39);
+            this.btnFixPhysicalFiles.Location = new System.Drawing.Point(720, 74);
             this.btnFixPhysicalFiles.Name = "btnFixPhysicalFiles";
             this.btnFixPhysicalFiles.Size = new System.Drawing.Size(63, 34);
             this.btnFixPhysicalFiles.TabIndex = 47;
@@ -296,7 +304,7 @@
             // 
             // btnCheckPhysicalFiles
             // 
-            this.btnCheckPhysicalFiles.Location = new System.Drawing.Point(789, 39);
+            this.btnCheckPhysicalFiles.Location = new System.Drawing.Point(789, 74);
             this.btnCheckPhysicalFiles.Name = "btnCheckPhysicalFiles";
             this.btnCheckPhysicalFiles.Size = new System.Drawing.Size(63, 34);
             this.btnCheckPhysicalFiles.TabIndex = 45;
@@ -308,7 +316,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("NSimSun", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(525, 11);
+            this.label5.Location = new System.Drawing.Point(525, 46);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 18);
             this.label5.TabIndex = 48;
@@ -318,7 +326,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("NSimSun", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(751, 12);
+            this.label6.Location = new System.Drawing.Point(751, 47);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(106, 18);
             this.label6.TabIndex = 49;
@@ -326,7 +334,7 @@
             // 
             // btnDatabaseExtendedProperties
             // 
-            this.btnDatabaseExtendedProperties.Location = new System.Drawing.Point(726, 151);
+            this.btnDatabaseExtendedProperties.Location = new System.Drawing.Point(726, 186);
             this.btnDatabaseExtendedProperties.Name = "btnDatabaseExtendedProperties";
             this.btnDatabaseExtendedProperties.Size = new System.Drawing.Size(134, 34);
             this.btnDatabaseExtendedProperties.TabIndex = 50;
@@ -334,10 +342,48 @@
             this.btnDatabaseExtendedProperties.UseVisualStyleBackColor = true;
             this.btnDatabaseExtendedProperties.Click += new System.EventHandler(this.btnDatabaseExtendedProperties_Click);
             // 
+            // btnSetOnline
+            // 
+            this.btnSetOnline.Location = new System.Drawing.Point(1038, 73);
+            this.btnSetOnline.Name = "btnSetOnline";
+            this.btnSetOnline.Size = new System.Drawing.Size(59, 34);
+            this.btnSetOnline.TabIndex = 52;
+            this.btnSetOnline.Text = "تشغيل";
+            this.btnSetOnline.UseVisualStyleBackColor = true;
+            this.btnSetOnline.Click += new System.EventHandler(this.btnSetOnline_Click);
+            // 
+            // btnSetOffline
+            // 
+            this.btnSetOffline.Location = new System.Drawing.Point(926, 75);
+            this.btnSetOffline.Name = "btnSetOffline";
+            this.btnSetOffline.Size = new System.Drawing.Size(59, 34);
+            this.btnSetOffline.TabIndex = 54;
+            this.btnSetOffline.Text = "اغلاق";
+            this.btnSetOffline.UseVisualStyleBackColor = true;
+            this.btnSetOffline.Click += new System.EventHandler(this.btnSetOffline_Click);
+            // 
+            // pictureBox17
+            // 
+            this.pictureBox17.Image = global::DBBACKUP.Properties.Resources.online_30px;
+            this.pictureBox17.Location = new System.Drawing.Point(991, 75);
+            this.pictureBox17.Name = "pictureBox17";
+            this.pictureBox17.Size = new System.Drawing.Size(36, 34);
+            this.pictureBox17.TabIndex = 55;
+            this.pictureBox17.TabStop = false;
+            // 
+            // pictureBox16
+            // 
+            this.pictureBox16.Image = global::DBBACKUP.Properties.Resources.offline_30px;
+            this.pictureBox16.Location = new System.Drawing.Point(1103, 73);
+            this.pictureBox16.Name = "pictureBox16";
+            this.pictureBox16.Size = new System.Drawing.Size(36, 34);
+            this.pictureBox16.TabIndex = 53;
+            this.pictureBox16.TabStop = false;
+            // 
             // pictureBox15
             // 
             this.pictureBox15.Image = global::DBBACKUP.Properties.Resources.property_30px;
-            this.pictureBox15.Location = new System.Drawing.Point(866, 155);
+            this.pictureBox15.Location = new System.Drawing.Point(866, 190);
             this.pictureBox15.Name = "pictureBox15";
             this.pictureBox15.Size = new System.Drawing.Size(47, 30);
             this.pictureBox15.TabIndex = 51;
@@ -346,7 +392,7 @@
             // pictureBox14
             // 
             this.pictureBox14.Image = global::DBBACKUP.Properties.Resources.polyline_30px;
-            this.pictureBox14.Location = new System.Drawing.Point(858, 43);
+            this.pictureBox14.Location = new System.Drawing.Point(858, 78);
             this.pictureBox14.Name = "pictureBox14";
             this.pictureBox14.Size = new System.Drawing.Size(47, 30);
             this.pictureBox14.TabIndex = 46;
@@ -355,7 +401,7 @@
             // pictureBox13
             // 
             this.pictureBox13.Image = global::DBBACKUP.Properties.Resources.polyline_30px1;
-            this.pictureBox13.Location = new System.Drawing.Point(627, 39);
+            this.pictureBox13.Location = new System.Drawing.Point(627, 74);
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(47, 30);
             this.pictureBox13.TabIndex = 43;
@@ -364,7 +410,7 @@
             // pictureBox12
             // 
             this.pictureBox12.Image = global::DBBACKUP.Properties.Resources.geography_30px;
-            this.pictureBox12.Location = new System.Drawing.Point(361, 43);
+            this.pictureBox12.Location = new System.Drawing.Point(361, 78);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(36, 30);
             this.pictureBox12.TabIndex = 41;
@@ -373,7 +419,7 @@
             // pictureBox11
             // 
             this.pictureBox11.Image = global::DBBACKUP.Properties.Resources.coming_soon_30px;
-            this.pictureBox11.Location = new System.Drawing.Point(629, 155);
+            this.pictureBox11.Location = new System.Drawing.Point(629, 190);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(47, 30);
             this.pictureBox11.TabIndex = 38;
@@ -382,7 +428,7 @@
             // pictureBox10
             // 
             this.pictureBox10.Image = global::DBBACKUP.Properties.Resources.single_page_mode_30px;
-            this.pictureBox10.Location = new System.Drawing.Point(401, 155);
+            this.pictureBox10.Location = new System.Drawing.Point(401, 190);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(47, 30);
             this.pictureBox10.TabIndex = 36;
@@ -391,7 +437,7 @@
             // pictureBox9
             // 
             this.pictureBox9.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
-            this.pictureBox9.Location = new System.Drawing.Point(194, 151);
+            this.pictureBox9.Location = new System.Drawing.Point(194, 186);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(47, 30);
             this.pictureBox9.TabIndex = 34;
@@ -400,7 +446,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::DBBACKUP.Properties.Resources.add_list_30px;
-            this.pictureBox4.Location = new System.Drawing.Point(628, 93);
+            this.pictureBox4.Location = new System.Drawing.Point(628, 128);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(47, 34);
             this.pictureBox4.TabIndex = 32;
@@ -418,7 +464,7 @@
             // pictureBox7
             // 
             this.pictureBox7.Image = global::DBBACKUP.Properties.Resources.numbered_list_30px;
-            this.pictureBox7.Location = new System.Drawing.Point(852, 95);
+            this.pictureBox7.Location = new System.Drawing.Point(852, 130);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(49, 34);
             this.pictureBox7.TabIndex = 26;
@@ -427,7 +473,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::DBBACKUP.Properties.Resources.collapse_30px;
-            this.pictureBox6.Location = new System.Drawing.Point(1056, 93);
+            this.pictureBox6.Location = new System.Drawing.Point(1056, 128);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(36, 39);
             this.pictureBox6.TabIndex = 25;
@@ -436,7 +482,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::DBBACKUP.Properties.Resources.to_do_30px;
-            this.pictureBox5.Location = new System.Drawing.Point(401, 93);
+            this.pictureBox5.Location = new System.Drawing.Point(401, 128);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(47, 34);
             this.pictureBox5.TabIndex = 24;
@@ -445,7 +491,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::DBBACKUP.Properties.Resources.financial_growth_analysis_30px;
-            this.pictureBox3.Location = new System.Drawing.Point(192, 97);
+            this.pictureBox3.Location = new System.Drawing.Point(192, 132);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(47, 30);
             this.pictureBox3.TabIndex = 22;
@@ -469,11 +515,34 @@
             this.pictureBox2.TabIndex = 21;
             this.pictureBox2.TabStop = false;
             // 
+            // panel1DBstate
+            // 
+            this.panel1DBstate.Location = new System.Drawing.Point(0, 0);
+            this.panel1DBstate.Name = "panel1DBstate";
+            this.panel1DBstate.Size = new System.Drawing.Size(1364, 18);
+            this.panel1DBstate.TabIndex = 56;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("NSimSun", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(991, 50);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(82, 18);
+            this.label7.TabIndex = 57;
+            this.label7.Text = "حالة القاعده ";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
             // DataBase_Info_Fix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1348, 709);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.pictureBox17);
+            this.Controls.Add(this.btnSetOffline);
+            this.Controls.Add(this.pictureBox16);
+            this.Controls.Add(this.btnSetOnline);
             this.Controls.Add(this.pictureBox15);
             this.Controls.Add(this.btnDatabaseExtendedProperties);
             this.Controls.Add(this.label6);
@@ -514,6 +583,7 @@
             this.Controls.Add(this.ComboBoxDatabaseName);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.panel1DBstate);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DataBase_Info_Fix";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -521,6 +591,8 @@
             this.Load += new System.EventHandler(this.DataBase_Info_Fix_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
@@ -584,5 +656,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox15;
         private System.Windows.Forms.Button btnDatabaseExtendedProperties;
+        private System.Windows.Forms.PictureBox pictureBox16;
+        private System.Windows.Forms.Button btnSetOnline;
+        private System.Windows.Forms.PictureBox pictureBox17;
+        private System.Windows.Forms.Button btnSetOffline;
+        private System.Windows.Forms.Panel panel1DBstate;
+
+        private System.Windows.Forms.Label label7;
     }
 }

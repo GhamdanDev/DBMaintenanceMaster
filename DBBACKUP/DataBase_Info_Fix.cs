@@ -214,8 +214,9 @@ namespace DBBACKUP
         private void ComboBoxDatabaseName_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(ComboBoxDatabaseName.Text))
-            {
-                LoadData(ComboBoxDatabaseName.Text);
+            { LoadData(ComboBoxDatabaseName.Text);
+                UpdatePanelColor(ComboBoxDatabaseName.Text); // تحديث لون اللوحة بعد تغيير الحالة
+               
             }
         }
 
@@ -393,10 +394,11 @@ namespace DBBACKUP
         {
             if (!string.IsNullOrWhiteSpace(ComboBoxDatabaseName.Text))
             {
+                UpdatePanelColor(ComboBoxDatabaseName.Text); // تحديث لون اللوحة بعد تغيير 
                 LoadDataCountInfoDB(ComboBoxDatabaseName.Text);
                 LoadDataCountInfoDB2(ComboBoxDatabaseName.Text);
                 LoadData(ComboBoxDatabaseName.Text);
-            }
+                  }
             else
                 MessageBox.Show("select Database name");
 
@@ -623,55 +625,7 @@ namespace DBBACKUP
                 }
             }
         }
-        /*  private void CreateDatabaseAudit(string databaseName, string auditPath)
-          {
-              string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True;";
-              using (SqlConnection conn = new SqlConnection(connectionString))
-              {
-                  try
-                  {
-                      conn.Open();
-                      using (SqlCommand useDbCmd = new SqlCommand($"USE {databaseName}", conn))
-                      {
-                          useDbCmd.ExecuteNonQuery();
-                      }
-
-                      string createDirSql = "EXEC master.sys.xp_create_subdir @path";
-                      using (SqlCommand cmd = new SqlCommand(createDirSql, conn))
-                      {
-                          cmd.Parameters.AddWithValue("@path", auditPath);
-                          cmd.ExecuteNonQuery();
-                      }
-
-                      string auditSql = @"
-  USE master;
-  CREATE SERVER AUDIT [" + databaseName + @"] 
-  TO FILE ( FILEPATH = @AuditPath, MAXSIZE = 1GB, MAX_ROLLOVER_FILES = 15, RESERVE_DISK_SPACE = OFF ) 
-  WITH ( QUEUE_DELAY = 1000 );
-  ALTER SERVER AUDIT [" + databaseName + @"] WITH (STATE = ON);
-  USE [" + databaseName + @"];
-  CREATE DATABASE AUDIT SPECIFICATION [" + databaseName + @"]
-  FOR SERVER AUDIT [" + databaseName + @"]
-  ADD (SCHEMA_OBJECT_ACCESS_GROUP) WITH (STATE = ON);
-  ";
-
-                      using (SqlCommand cmd = new SqlCommand(auditSql, conn))
-                      {
-                          cmd.Parameters.AddWithValue("@AuditPath", auditPath);
-                          cmd.ExecuteNonQuery();
-                      }
-
-                      MessageBox.Show("Database audit created successfully!");
-                  }
-                  catch (Exception ex)
-                  {
-                      //MessageBox.Show("An error occurred while creating database audit: " + ex.Message);
-                      ShowErrorMessage("An error occurred while creating database audit: " + ex.Message);
-
-                  }
-              }
-          }
-  */
+  
 
 
         private void CreateDatabaseAudit(string databaseName, string auditPath)
@@ -938,200 +892,7 @@ FROM sys.fn_get_audit_file(@auditFilePath, DEFAULT, DEFAULT);";
                 }
             }
         }
-        //Changing Database Collation
-        /*private void LoadCollations()
-        {
-            string query = "SELECT name FROM sys.fn_helpcollations();";
-            string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True;";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
-                DataTable collationsTable = new DataTable();
-                adapter.Fill(collationsTable);
-
-                cbNewCollation.DataSource = collationsTable;
-                cbNewCollation.DisplayMember = "name";
-                cbNewCollation.ValueMember = "name";
-            }
-        }
-
-        private string GenerateChangeCollationScript(string newCollation)
-        {
-            // Combine the script parts into a single script
-            string script = @"
-        DECLARE @NewCollation VARCHAR(128) = '" + newCollation + @"';
-
-        SELECT IDENTITY(INT, 1, 1) AS ID, 0 AS ExecutionOrder,
-               CAST('--Suite of commands to change collation of all columns that are not currently ' + QUOTENAME(@NewCollation) AS VARCHAR(MAX)) AS Command
-        INTO #Results;
-
-        SELECT objz.object_id, SCHEMA_NAME(objz.schema_id) AS SchemaName, objz.name AS TableName, colz.name AS ColumnName,
-               colz.collation_name, colz.column_id
-        INTO #MyAffectedTables
-        FROM sys.columns colz
-            INNER JOIN sys.tables objz ON colz.object_id = objz.object_id
-        WHERE colz.collation_name IS NOT NULL
-              AND objz.is_ms_shipped = 0
-              AND colz.is_computed = 0
-              AND colz.collation_name <> @NewCollation;
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT 10, CONVERT(VARCHAR(8000), 'ALTER TABLE ' + QUOTENAME(tabz.SchemaName) + '.' + QUOTENAME(tabz.TableName) + ' DROP CONSTRAINT ' + QUOTENAME(conz.name) + ';')
-        FROM sys.check_constraints conz
-            INNER JOIN #MyAffectedTables tabz ON conz.parent_object_id = tabz.object_id AND conz.parent_column_id = tabz.column_id;
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT 100, CONVERT(VARCHAR(8000), 'ALTER TABLE ' + QUOTENAME(tabz.SchemaName) + '.' + QUOTENAME(tabz.TableName) + ' ADD CONSTRAINT ' + QUOTENAME(conz.name) + ' CHECK ' + conz.definition + ';')
-        FROM sys.check_constraints conz
-            INNER JOIN #MyAffectedTables tabz ON conz.parent_object_id = tabz.object_id AND conz.parent_column_id = tabz.column_id;
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT 20, CONVERT(VARCHAR(8000), 'ALTER TABLE ' + QUOTENAME(tabz.SchemaName) + '.' + QUOTENAME(tabz.TableName) + ' DROP CONSTRAINT ' + QUOTENAME(conz.name) + ';')
-        FROM sys.default_constraints conz
-            INNER JOIN #MyAffectedTables tabz ON conz.parent_object_id = tabz.object_id AND conz.parent_column_id = tabz.column_id;
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT 200, CONVERT(VARCHAR(8000), 'ALTER TABLE ' + QUOTENAME(tabz.SchemaName) + '.' + QUOTENAME(tabz.TableName) + ' ADD CONSTRAINT ' + QUOTENAME(conz.name) + ' DEFAULT ' + conz.definition + ' FOR ' + QUOTENAME(tabz.ColumnName) + ';')
-        FROM sys.default_constraints conz
-            INNER JOIN #MyAffectedTables tabz ON conz.parent_object_id = tabz.object_id AND conz.parent_column_id = tabz.column_id;
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT DISTINCT 30, 'ALTER TABLE ' + QUOTENAME(SCHEMA_NAME(objz.schema_id)) + '.' + QUOTENAME(objz.name) + ' DROP COLUMN ' + QUOTENAME(colz.name) + ';'
-        FROM sys.columns colz
-            LEFT OUTER JOIN sys.tables objz ON colz.[object_id] = objz.[object_id]
-            LEFT OUTER JOIN sys.computed_columns CALC ON colz.[object_id] = CALC.[object_id] AND colz.[column_id] = CALC.[column_id]
-            LEFT OUTER JOIN sys.sql_expression_dependencies depz ON colz.object_id = depz.referenced_id AND colz.column_id = depz.referencing_minor_id
-            INNER JOIN #MyAffectedTables tabz ON depz.referenced_id = tabz.object_id AND depz.referenced_minor_id = tabz.column_id
-        WHERE colz.is_computed = 1;
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT DISTINCT 300, 'ALTER TABLE ' + QUOTENAME(SCHEMA_NAME(objz.schema_id)) + '.' + QUOTENAME(objz.name) + ' ADD ' + QUOTENAME(colz.name) + ' AS ' + ISNULL(CALC.definition, '') + CASE WHEN CALC.is_persisted = 1 THEN ' PERSISTED' ELSE '' END + ';'
-        FROM sys.columns colz
-            LEFT OUTER JOIN sys.tables objz ON colz.[object_id] = objz.[object_id]
-            LEFT OUTER JOIN sys.computed_columns CALC ON colz.[object_id] = CALC.[object_id] AND colz.[column_id] = CALC.[column_id]
-            LEFT OUTER JOIN sys.sql_expression_dependencies depz ON colz.object_id = depz.referenced_id AND colz.column_id = depz.referencing_minor_id
-            INNER JOIN #MyAffectedTables tabz ON depz.referenced_id = tabz.object_id AND depz.referenced_minor_id = tabz.column_id
-        WHERE colz.is_computed = 1;
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT DISTINCT 40, CONVERT(VARCHAR(8000), 'ALTER TABLE ' + QUOTENAME(tabz.SchemaName) + '.' + QUOTENAME(tabz.TableName) + ' DROP CONSTRAINT ' + QUOTENAME(conz.name) + ';')
-        FROM sys.foreign_keys conz
-            INNER JOIN sys.foreign_key_columns colz ON conz.object_id = colz.constraint_object_id
-            INNER JOIN #MyAffectedTables tabz ON conz.parent_object_id = tabz.object_id
-        WHERE tabz.object_id = colz.parent_object_id AND tabz.column_id = colz.parent_column_id;
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT DISTINCT 850, 'ALTER TABLE ' + QUOTENAME(SCHEMA_NAME(conz.schema_id)) + '.' + QUOTENAME(OBJECT_NAME(conz.parent_object_id)) + ' ADD CONSTRAINT ' + QUOTENAME(conz.name) + ' FOREIGN KEY (' + STUFF((SELECT ', ' + QUOTENAME(colz2.name)
-              FROM sys.foreign_key_columns colz2
-              WHERE colz2.parent_object_id = colz.parent_object_id
-                AND colz2.parent_column_id = colz.parent_column_id
-                AND colz2.constraint_object_id = colz.constraint_object_id
-              ORDER BY colz2.constraint_column_id
-              FOR XML PATH ('')), 1, 1, '') + ') REFERENCES ' + QUOTENAME(SCHEMA_NAME(objz.schema_id)) + '.' + QUOTENAME(objz.name) + ' (' + STUFF((SELECT ', ' + QUOTENAME(colz2.name)
-              FROM sys.foreign_key_columns colz2
-              WHERE colz2.referenced_object_id = colz.referenced_object_id
-                AND colz2.referenced_column_id = colz.referenced_column_id
-                AND colz2.constraint_object_id = colz.constraint_object_id
-              ORDER BY colz2.constraint_column_id
-              FOR XML PATH ('')), 1, 1, '') + ');'
-        FROM sys.foreign_keys conz
-            INNER JOIN sys.foreign_key_columns colz ON conz.object_id = colz.constraint_object_id
-            INNER JOIN sys.columns colz2 ON colz.referenced_object_id = colz2.object_id
-                AND colz.referenced_column_id = colz2.column_id
-            INNER JOIN sys.tables objz ON colz2.object_id = objz.object_id
-            INNER JOIN #MyAffectedTables tabz ON conz.parent_object_id = tabz.object_id
-        WHERE tabz.object_id = colz.parent_object_id AND tabz.column_id = colz.parent_column_id;
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT DISTINCT 50, CONVERT(VARCHAR(8000), 'ALTER INDEX ' + QUOTENAME(indz.name) + ' ON ' + QUOTENAME(SCHEMA_NAME(objz.schema_id)) + '.' + QUOTENAME(objz.name) + ' DISABLE;')
-        FROM sys.indexes indz
-            INNER JOIN sys.index_columns colz ON indz.object_id = colz.object_id AND indz.index_id = colz.index_id
-            INNER JOIN #MyAffectedTables tabz ON colz.object_id = tabz.object_id
-        WHERE tabz.object_id = colz.object_id AND tabz.column_id = colz.column_id AND indz.type_desc = 'NONCLUSTERED';
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT DISTINCT 600, CONVERT(VARCHAR(8000), 'ALTER INDEX ' + QUOTENAME(indz.name) + ' ON ' + QUOTENAME(SCHEMA_NAME(objz.schema_id)) + '.' + QUOTENAME(objz.name) + ' REBUILD;')
-        FROM sys.indexes indz
-            INNER JOIN sys.index_columns colz ON indz.object_id = colz.object_id AND indz.index_id = colz.index_id
-            INNER JOIN #MyAffectedTables tabz ON colz.object_id = tabz.object_id
-        WHERE tabz.object_id = colz.object_id AND tabz.column_id = colz.column_id AND indz.type_desc = 'NONCLUSTERED';
-
-        INSERT INTO #Results (ExecutionOrder, Command)
-        SELECT 900, CONVERT(VARCHAR(8000), 'ALTER TABLE ' + QUOTENAME(SCHEMA_NAME(objz.schema_id)) + '.' + QUOTENAME(objz.name) + ' ALTER COLUMN ' + QUOTENAME(colz.name) + ' ' + typz.name + CASE typz.name
-            WHEN 'char' THEN '(' + CONVERT(VARCHAR, colz.max_length) + ')'
-            WHEN 'varchar' THEN CASE colz.max_length
-                WHEN -1 THEN '(MAX)'
-                ELSE '(' + CONVERT(VARCHAR, colz.max_length) + ')'
-                END
-            WHEN 'nchar' THEN '(' + CONVERT(VARCHAR, colz.max_length / 2) + ')'
-            WHEN 'nvarchar' THEN CASE colz.max_length
-                WHEN -1 THEN '(MAX)'
-                ELSE '(' + CONVERT(VARCHAR, colz.max_length / 2) + ')'
-                END
-            WHEN 'binary' THEN '(' + CONVERT(VARCHAR, colz.max_length) + ')'
-            WHEN 'varbinary' THEN CASE colz.max_length
-                WHEN -1 THEN '(MAX)'
-                ELSE '(' + CONVERT(VARCHAR, colz.max_length) + ')'
-                END
-            ELSE ''
-            END + ' COLLATE ' + @NewCollation + CASE colz.is_nullable
-            WHEN 1 THEN ' NULL'
-            ELSE ' NOT NULL'
-            END + ';')
-        FROM sys.columns colz
-            LEFT OUTER JOIN sys.tables objz ON colz.[object_id] = objz.[object_id]
-            LEFT OUTER JOIN sys.computed_columns CALC ON colz.[object_id] = CALC.[object_id] AND colz.[column_id] = CALC.[column_id]
-            LEFT OUTER JOIN sys.sql_expression_dependencies depz ON colz.object_id = depz.referenced_id AND colz.column_id = depz.referencing_minor_id
-            INNER JOIN sys.types typz ON colz.system_type_id = typz.system_type_id AND colz.user_type_id = typz.user_type_id
-            INNER JOIN #MyAffectedTables tabz ON colz.[object_id] = tabz.[object_id] AND colz.[column_id] = tabz.[column_id]
-        WHERE objz.is_ms_shipped = 0 AND colz.is_computed = 0;
-
-        SELECT Command
-        FROM #Results
-        ORDER BY ExecutionOrder, ID;
-    ";
-
-            return script;
-        }
-
         
-        private void btnApplyCollation_Click_1(object sender, EventArgs e)
-        {
-            string newCollation = cbNewCollation.SelectedValue.ToString();
-
-            if (string.IsNullOrEmpty(newCollation))
-            {
-                MessageBox.Show("Please select a new collation.");
-                return;
-            }
-
-            string changeCollationScript = GenerateChangeCollationScript(newCollation);
-            string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True;";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlTransaction transaction = conn.BeginTransaction();
-
-                try
-                {
-                    SqlCommand cmd = new SqlCommand(changeCollationScript, conn, transaction);
-                    cmd.ExecuteNonQuery();
-                    transaction.Commit();
-                    MessageBox.Show("Collation change applied successfully.");
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                    //MessageBox.Show("Error applying collation change: " + ex.Message);
-
-                    ShowErrorMessage("Error applying collation change: " + ex.Message);
-                }
-            }
-        }
-     */
-
 
         private void LoadCollations()
         {
@@ -2091,7 +1852,106 @@ IF
         {
             LoadDatabaseExtendedProperties();
         }
+
+        private void btnSetOnline_Click(object sender, EventArgs e)
+        {
+            string databaseName = ComboBoxDatabaseName.Text;
+            if (string.IsNullOrWhiteSpace(databaseName))
+            {
+                MessageBox.Show("Please enter a valid database name.");
+                return;
+            }
+
+            SetDatabaseState(databaseName, "ONLINE");
+            UpdatePanelColor(databaseName); // تحديث لون اللوحة بعد تغيير الحالة
+        }
+        private void btnSetOffline_Click(object sender, EventArgs e)
+        {
+            string databaseName = ComboBoxDatabaseName.Text;
+            if (string.IsNullOrWhiteSpace(databaseName))
+            {
+                 
+                MessageBox.Show("Please enter a valid database name.");
+                return;
+            }
+
+            SetDatabaseState(databaseName, "OFFLINE");
+            UpdatePanelColor(databaseName); // تحديث لون اللوحة بعد تغيير الحالة
+        }
+
+        private void SetDatabaseState(string databaseName,string state)
+        {
+            string connectionString = $"Server={ComboBoxserverName.Text};Integrated Security=true;Database=master;";
+            string query = $"ALTER DATABASE [{databaseName}] SET {state}";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show($"Database {databaseName} is set state successfully.");
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage($"Error setting database state: {ex.Message}");
+                MessageBox.Show($"Error setting database {databaseName} ONLINE: {ex.Message}");
+            }
+        }
+
+        private void UpdatePanelColor(string databaseName)
+        {
+            string state = GetDatabaseState(databaseName);
+
+            if (state == "ONLINE")
+            {
+
+                panel1DBstate.BackColor = Color.Green;
+            }
+            else if (state == "OFFLINE")
+            {
+                panel1DBstate.BackColor = Color.Red;
+            }
+            else
+            {
+                panel1DBstate.BackColor = Color.Gray;
+            }
+        }
+        private string GetDatabaseState(string databaseName)
+        {
+            string query = $"SELECT state_desc FROM sys.databases WHERE name = '{databaseName}'";
+            string state = string.Empty;
+            string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True; "; // استبدل بقيمة سلسلة الاتصال الخاصة بك
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    state = command.ExecuteScalar().ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error retrieving database state: {ex.Message}");
+                }
+            }
+
+            return state;
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+
+
+}
 
 
     public class DatabaseFileChecker
@@ -2235,17 +2095,21 @@ IF
                 }
             }
         }
-    }
-
-
-
-
-
-
 
 
 
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
