@@ -57,6 +57,15 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.button5Lastuseraccesstodatabase = new System.Windows.Forms.Button();
+            this.cbNewCollation = new System.Windows.Forms.ComboBox();
+            this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.btnApplyCollation = new System.Windows.Forms.Button();
+            this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.btnCheckFiles = new System.Windows.Forms.Button();
+            this.btnFixFiles = new System.Windows.Forms.Button();
+            this.btnFixPhysicalFiles = new System.Windows.Forms.Button();
+            this.pictureBox14 = new System.Windows.Forms.PictureBox();
+            this.btnCheckPhysicalFiles = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
@@ -70,6 +79,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             this.SuspendLayout();
             // 
             // ComboBoxDatabaseName
@@ -328,11 +340,105 @@
             this.button5Lastuseraccesstodatabase.UseVisualStyleBackColor = true;
             this.button5Lastuseraccesstodatabase.Click += new System.EventHandler(this.button5Lastuseraccesstodatabase_Click);
             // 
+            // cbNewCollation
+            // 
+            this.cbNewCollation.FormattingEnabled = true;
+            this.cbNewCollation.Location = new System.Drawing.Point(62, 12);
+            this.cbNewCollation.Name = "cbNewCollation";
+            this.cbNewCollation.Size = new System.Drawing.Size(333, 21);
+            this.cbNewCollation.TabIndex = 39;
+            // 
+            // pictureBox12
+            // 
+            this.pictureBox12.Image = global::DBBACKUP.Properties.Resources.geography_30px;
+            this.pictureBox12.Location = new System.Drawing.Point(361, 43);
+            this.pictureBox12.Name = "pictureBox12";
+            this.pictureBox12.Size = new System.Drawing.Size(36, 30);
+            this.pictureBox12.TabIndex = 41;
+            this.pictureBox12.TabStop = false;
+            // 
+            // btnApplyCollation
+            // 
+            this.btnApplyCollation.Location = new System.Drawing.Point(62, 39);
+            this.btnApplyCollation.Name = "btnApplyCollation";
+            this.btnApplyCollation.Size = new System.Drawing.Size(291, 34);
+            this.btnApplyCollation.TabIndex = 40;
+            this.btnApplyCollation.Text = "تغيير ترميز قاعدة البيانات ";
+            this.btnApplyCollation.UseVisualStyleBackColor = true;
+            this.btnApplyCollation.Click += new System.EventHandler(this.btnApplyCollation_Click_1);
+            // 
+            // pictureBox13
+            // 
+            this.pictureBox13.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
+            this.pictureBox13.Location = new System.Drawing.Point(834, 155);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(47, 30);
+            this.pictureBox13.TabIndex = 43;
+            this.pictureBox13.TabStop = false;
+            // 
+            // btnCheckFiles
+            // 
+            this.btnCheckFiles.Location = new System.Drawing.Point(765, 151);
+            this.btnCheckFiles.Name = "btnCheckFiles";
+            this.btnCheckFiles.Size = new System.Drawing.Size(63, 34);
+            this.btnCheckFiles.TabIndex = 42;
+            this.btnCheckFiles.Text = "فحص التطباق";
+            this.btnCheckFiles.UseVisualStyleBackColor = true;
+            this.btnCheckFiles.Click += new System.EventHandler(this.btnCheckFiles_Click);
+            // 
+            // btnFixFiles
+            // 
+            this.btnFixFiles.Location = new System.Drawing.Point(696, 151);
+            this.btnFixFiles.Name = "btnFixFiles";
+            this.btnFixFiles.Size = new System.Drawing.Size(63, 34);
+            this.btnFixFiles.TabIndex = 44;
+            this.btnFixFiles.Text = "اصلاح";
+            this.btnFixFiles.UseVisualStyleBackColor = true;
+            this.btnFixFiles.Click += new System.EventHandler(this.btnFixFiles_Click);
+            // 
+            // btnFixPhysicalFiles
+            // 
+            this.btnFixPhysicalFiles.Location = new System.Drawing.Point(909, 155);
+            this.btnFixPhysicalFiles.Name = "btnFixPhysicalFiles";
+            this.btnFixPhysicalFiles.Size = new System.Drawing.Size(63, 34);
+            this.btnFixPhysicalFiles.TabIndex = 47;
+            this.btnFixPhysicalFiles.Text = "اصلاح";
+            this.btnFixPhysicalFiles.UseVisualStyleBackColor = true;
+            this.btnFixPhysicalFiles.Click += new System.EventHandler(this.btnFixPhysicalFiles_Click);
+            // 
+            // pictureBox14
+            // 
+            this.pictureBox14.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
+            this.pictureBox14.Location = new System.Drawing.Point(1047, 159);
+            this.pictureBox14.Name = "pictureBox14";
+            this.pictureBox14.Size = new System.Drawing.Size(47, 30);
+            this.pictureBox14.TabIndex = 46;
+            this.pictureBox14.TabStop = false;
+            // 
+            // btnCheckPhysicalFiles
+            // 
+            this.btnCheckPhysicalFiles.Location = new System.Drawing.Point(978, 155);
+            this.btnCheckPhysicalFiles.Name = "btnCheckPhysicalFiles";
+            this.btnCheckPhysicalFiles.Size = new System.Drawing.Size(63, 34);
+            this.btnCheckPhysicalFiles.TabIndex = 45;
+            this.btnCheckPhysicalFiles.Text = "فحص التطباق";
+            this.btnCheckPhysicalFiles.UseVisualStyleBackColor = true;
+            this.btnCheckPhysicalFiles.Click += new System.EventHandler(this.btnCheckPhysicalFiles_Click);
+            // 
             // DataBase_Info_Fix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1348, 709);
+            this.Controls.Add(this.btnFixPhysicalFiles);
+            this.Controls.Add(this.pictureBox14);
+            this.Controls.Add(this.btnCheckPhysicalFiles);
+            this.Controls.Add(this.btnFixFiles);
+            this.Controls.Add(this.pictureBox13);
+            this.Controls.Add(this.btnCheckFiles);
+            this.Controls.Add(this.pictureBox12);
+            this.Controls.Add(this.btnApplyCollation);
+            this.Controls.Add(this.cbNewCollation);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.button5Lastuseraccesstodatabase);
             this.Controls.Add(this.pictureBox10);
@@ -378,6 +484,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -413,5 +522,14 @@
         private System.Windows.Forms.Button btnDisplayAuditData;
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.Button button5Lastuseraccesstodatabase;
+        private System.Windows.Forms.ComboBox cbNewCollation;
+        private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.Button btnApplyCollation;
+        private System.Windows.Forms.PictureBox pictureBox13;
+        private System.Windows.Forms.Button btnCheckFiles;
+        private System.Windows.Forms.Button btnFixFiles;
+        private System.Windows.Forms.Button btnFixPhysicalFiles;
+        private System.Windows.Forms.PictureBox pictureBox14;
+        private System.Windows.Forms.Button btnCheckPhysicalFiles;
     }
 }

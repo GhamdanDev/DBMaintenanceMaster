@@ -903,6 +903,16 @@ namespace DBBACKUP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap geography_30px {
+            get {
+                object obj = ResourceManager.GetObject("geography_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap highway_sign_30px {
             get {
                 object obj = ResourceManager.GetObject("highway_sign_30px", resourceCulture);

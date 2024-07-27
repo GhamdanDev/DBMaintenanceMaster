@@ -271,6 +271,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="database.png" />
+    <None Include="Resources\geography_30px.png" />
     <None Include="Resources\highway_sign_30px.png" />
     <None Include="Resources\info_30px.png" />
     <None Include="Resources\imac_clock_30px.png" />
