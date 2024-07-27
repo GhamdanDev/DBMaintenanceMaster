@@ -483,6 +483,16 @@ namespace DBBACKUP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap coming_soon_30px {
+            get {
+                object obj = ResourceManager.GetObject("coming_soon_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap data_backup_30px {
             get {
                 object obj = ResourceManager.GetObject("data_backup_30px", resourceCulture);
@@ -1473,6 +1483,36 @@ namespace DBBACKUP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap polyline_30px {
+            get {
+                object obj = ResourceManager.GetObject("polyline_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap polyline_30px1 {
+            get {
+                object obj = ResourceManager.GetObject("polyline_30px1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap property_30px {
+            get {
+                object obj = ResourceManager.GetObject("property_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap search_database_30px {
             get {
                 object obj = ResourceManager.GetObject("search_database_30px", resourceCulture);
@@ -1906,6 +1946,16 @@ namespace DBBACKUP.Properties {
         internal static System.Drawing.Bitmap shield_100px9 {
             get {
                 object obj = ResourceManager.GetObject("shield_100px9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap single_page_mode_30px {
+            get {
+                object obj = ResourceManager.GetObject("single_page_mode_30px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

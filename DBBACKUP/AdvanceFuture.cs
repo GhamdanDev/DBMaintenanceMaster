@@ -13,7 +13,7 @@ namespace DBBACKUP
 {
     public partial class AdvanceFuture : Form
     {
-        private string connectionString = "Data Source=.; Initial Catalog=infoDB; Integrated Security=True;";
+        private string connectionString = "Data Source=.; Initial Catalog=master; Integrated Security=True;";
 
         public AdvanceFuture()
         {

@@ -136,9 +136,6 @@
   <data name="chart_50px3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chart_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cloud_storage_50px10" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cloud_storage_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\database.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -151,8 +148,8 @@
   <data name="search_database_50px5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search_database_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="add_list_30px3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add_list_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lock_10px8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lock_10px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="data_backup_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\data_backup_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -325,6 +322,9 @@
   <data name="search_database_30px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search_database_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="add_user_male_50px4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\add_user_male_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="search_database_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search_database_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -367,6 +367,9 @@
   <data name="pie_chart_50px9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pie_chart_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="single_page_mode_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\single_page_mode_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="plot_30px2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plot_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -378,6 +381,9 @@
   </data>
   <data name="collapse_30px3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\collapse_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="add_list_30px3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\add_list_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder_10px4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder_10px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -396,9 +402,6 @@
   </data>
   <data name="add_user_male_50px3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add_user_male_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lock_30px2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lock_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pie_chart_50px5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pie_chart_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -445,6 +448,9 @@
   <data name="add_user_male_50px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add_user_male_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="web_analytics_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\web_analytics_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="unlock_10px5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\unlock_10px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -465,6 +471,9 @@
   </data>
   <data name="lock_30px5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lock_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="property_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\property_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imac_clock_30px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imac_clock_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -491,9 +500,6 @@
     <value>..\Resources\security_portal_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lock_10px6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lock_10px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lock_10px8" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lock_10px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="table_50px5" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -544,11 +550,14 @@
   <data name="cloud_storage_50px2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cloud_storage_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="geography_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\geography_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="users_settings_50px2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\users_settings_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="add_user_male_50px10" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add_user_male_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cloud_storage_50px10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cloud_storage_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder_10px9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder_10px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -718,8 +727,8 @@
   <data name="add_user_male_50px7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add_user_male_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="shield_100px6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shield_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lock_30px2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lock_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="unlock_30px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\unlock_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -727,8 +736,8 @@
   <data name="folder_30px5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="add_user_male_50px4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add_user_male_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="web_analytics_100px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\web_analytics_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="electrical_30px10" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\electrical_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -742,8 +751,8 @@
   <data name="chart_50px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chart_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="web_analytics_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\web_analytics_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="add_user_male_50px10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\add_user_male_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="information6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\information.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -802,6 +811,9 @@
   <data name="lock_10px2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lock_10px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="coming_soon_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coming_soon_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="lock_10px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lock_10px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -814,10 +826,13 @@
   <data name="shield_100px7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shield_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="web_analytics_100px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\web_analytics_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="shield_100px6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shield_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="geography_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\geography_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="polyline_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\polyline_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="polyline_30px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\polyline_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

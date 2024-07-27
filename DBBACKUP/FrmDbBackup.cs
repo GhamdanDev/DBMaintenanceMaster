@@ -14,7 +14,7 @@ namespace DBBACKUP
         private SqlCommand cmd;
         private SqlConnection sqlCon;
         private SqlDataReader dr;
-        private string conString = "Data Source=.; Initial Catalog=infoDB; Integrated Security=True;";
+        private string conString = "Data Source=.; Initial Catalog=master; Integrated Security=True;";
         private SqlConnection con;
         private SqlCommand cmd2;
 
@@ -29,7 +29,7 @@ namespace DBBACKUP
             string connectionString = "Data Source=.;Integrated Security=True;";
             var databaseManager = new DatabaseManager(connectionString);
             databaseManager.CheckAndCreateDatabaseTables("infoDB");
-            sqlCon = new SqlConnection("Data Source=.; Initial Catalog=infoDB; Integrated Security=True;");
+            sqlCon = new SqlConnection("Data Source=.; Initial Catalog=master; Integrated Security=True;");
             
         }
 
