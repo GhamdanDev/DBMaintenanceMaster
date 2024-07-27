@@ -52,8 +52,106 @@ namespace DBBACKUP
             }
         }
 
+        private void LoadDatabaseExtendedProperties()
+        {
+  
+            string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True; "; // استبدل بقيمة سلسلة الاتصال الخاصة بك
+            string query = @"
+                IF OBJECT_ID('tempdb..#results') IS NOT NULL DROP TABLE #results;
+                CREATE TABLE #results
+                (
+                    DatabaseName sysname NOT NULL,
+                    ApplicationName sysname NULL,
+                    Owner sysname NULL
+                );
 
-        private void btnCheckPhysicalFiles_Click(object sender, EventArgs e)
+                INSERT INTO #results
+                EXEC sp_ineachdb '
+                IF OBJECT_ID(''tempdb..#dbs'') IS NOT NULL DROP TABLE #dbs;
+                IF OBJECT_ID(''tempdb..#props'') IS NOT NULL DROP TABLE #props;
+
+                CREATE TABLE #dbs
+                (
+                    DatabaseName sysname NOT NULL
+                );
+
+                INSERT INTO #dbs
+                (
+                    DatabaseName
+                )
+                SELECT DB_NAME() AS DatabaseName;
+
+                CREATE TABLE #props
+                (
+                    DatabaseName sysname NOT NULL,
+                    PropertyName sysname NULL,
+                    PropertyValue sysname NULL
+                );
+
+                INSERT INTO #props
+                (
+                    DatabaseName,
+                    PropertyName,
+                    PropertyValue
+                )
+                SELECT DB_NAME() AS DatabaseName,
+                       name AS PropertyName,
+                       CAST(value AS sysname) AS PropertyValue
+                FROM sys.extended_properties
+                WHERE class_desc = ''DATABASE''
+                      AND name IN ( ''Application Name'', ''Owner'' );
+
+                INSERT INTO #results
+                (
+                    DatabaseName,
+                    ApplicationName,
+                    Owner
+                )
+                SELECT pivot_table.DatabaseName,
+                       pivot_table.[Application Name],
+                       pivot_table.Owner
+                FROM
+                (
+                    SELECT d.DatabaseName,
+                           p.PropertyName,
+                           p.PropertyValue
+                    FROM #dbs AS d
+                        LEFT OUTER JOIN #props AS p
+                            ON d.DatabaseName = p.DatabaseName
+                ) t
+                PIVOT
+                (
+                    MIN(PropertyValue)
+                    FOR PropertyName IN ([Application Name], Owner)
+                ) AS pivot_table;
+                ',
+                @user_only = 1;
+
+                SELECT DatabaseName,
+                       ApplicationName,
+                       Owner
+                FROM #results
+                ORDER BY DatabaseName;
+            ";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
+    
+    private void btnCheckPhysicalFiles_Click(object sender, EventArgs e)
         {
 
             fileChecker = new DatabaseFileChecker("Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True;");
@@ -1989,7 +2087,10 @@ IF
             }
         }
 
-     
+        private void btnDatabaseExtendedProperties_Click(object sender, EventArgs e)
+        {
+            LoadDatabaseExtendedProperties();
+        }
     }
 
 

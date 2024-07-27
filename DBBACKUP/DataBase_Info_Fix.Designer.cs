@@ -66,6 +66,10 @@
             this.btnFixPhysicalFiles = new System.Windows.Forms.Button();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
             this.btnCheckPhysicalFiles = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.pictureBox15 = new System.Windows.Forms.PictureBox();
+            this.btnDatabaseExtendedProperties = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
@@ -82,6 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
             this.SuspendLayout();
             // 
             // ComboBoxDatabaseName
@@ -370,7 +375,7 @@
             // pictureBox13
             // 
             this.pictureBox13.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
-            this.pictureBox13.Location = new System.Drawing.Point(834, 155);
+            this.pictureBox13.Location = new System.Drawing.Point(578, 39);
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(47, 30);
             this.pictureBox13.TabIndex = 43;
@@ -378,17 +383,17 @@
             // 
             // btnCheckFiles
             // 
-            this.btnCheckFiles.Location = new System.Drawing.Point(765, 151);
+            this.btnCheckFiles.Location = new System.Drawing.Point(509, 35);
             this.btnCheckFiles.Name = "btnCheckFiles";
             this.btnCheckFiles.Size = new System.Drawing.Size(63, 34);
             this.btnCheckFiles.TabIndex = 42;
-            this.btnCheckFiles.Text = "فحص التطباق";
+            this.btnCheckFiles.Text = "فحص";
             this.btnCheckFiles.UseVisualStyleBackColor = true;
             this.btnCheckFiles.Click += new System.EventHandler(this.btnCheckFiles_Click);
             // 
             // btnFixFiles
             // 
-            this.btnFixFiles.Location = new System.Drawing.Point(696, 151);
+            this.btnFixFiles.Location = new System.Drawing.Point(440, 35);
             this.btnFixFiles.Name = "btnFixFiles";
             this.btnFixFiles.Size = new System.Drawing.Size(63, 34);
             this.btnFixFiles.TabIndex = 44;
@@ -398,7 +403,7 @@
             // 
             // btnFixPhysicalFiles
             // 
-            this.btnFixPhysicalFiles.Location = new System.Drawing.Point(909, 155);
+            this.btnFixPhysicalFiles.Location = new System.Drawing.Point(653, 39);
             this.btnFixPhysicalFiles.Name = "btnFixPhysicalFiles";
             this.btnFixPhysicalFiles.Size = new System.Drawing.Size(63, 34);
             this.btnFixPhysicalFiles.TabIndex = 47;
@@ -409,7 +414,7 @@
             // pictureBox14
             // 
             this.pictureBox14.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
-            this.pictureBox14.Location = new System.Drawing.Point(1047, 159);
+            this.pictureBox14.Location = new System.Drawing.Point(791, 43);
             this.pictureBox14.Name = "pictureBox14";
             this.pictureBox14.Size = new System.Drawing.Size(47, 30);
             this.pictureBox14.TabIndex = 46;
@@ -417,19 +422,62 @@
             // 
             // btnCheckPhysicalFiles
             // 
-            this.btnCheckPhysicalFiles.Location = new System.Drawing.Point(978, 155);
+            this.btnCheckPhysicalFiles.Location = new System.Drawing.Point(722, 39);
             this.btnCheckPhysicalFiles.Name = "btnCheckPhysicalFiles";
             this.btnCheckPhysicalFiles.Size = new System.Drawing.Size(63, 34);
             this.btnCheckPhysicalFiles.TabIndex = 45;
-            this.btnCheckPhysicalFiles.Text = "فحص التطباق";
+            this.btnCheckPhysicalFiles.Text = "فحص  ";
             this.btnCheckPhysicalFiles.UseVisualStyleBackColor = true;
             this.btnCheckPhysicalFiles.Click += new System.EventHandler(this.btnCheckPhysicalFiles_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("NSimSun", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(476, 11);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 18);
+            this.label5.TabIndex = 48;
+            this.label5.Text = "التطابق المنطقي";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("NSimSun", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(684, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(106, 18);
+            this.label6.TabIndex = 49;
+            this.label6.Text = "التطابق الفيزيائي";
+            // 
+            // pictureBox15
+            // 
+            this.pictureBox15.Image = global::DBBACKUP.Properties.Resources.highway_sign_30px;
+            this.pictureBox15.Location = new System.Drawing.Point(824, 155);
+            this.pictureBox15.Name = "pictureBox15";
+            this.pictureBox15.Size = new System.Drawing.Size(47, 30);
+            this.pictureBox15.TabIndex = 51;
+            this.pictureBox15.TabStop = false;
+            // 
+            // btnDatabaseExtendedProperties
+            // 
+            this.btnDatabaseExtendedProperties.Location = new System.Drawing.Point(684, 151);
+            this.btnDatabaseExtendedProperties.Name = "btnDatabaseExtendedProperties";
+            this.btnDatabaseExtendedProperties.Size = new System.Drawing.Size(134, 34);
+            this.btnDatabaseExtendedProperties.TabIndex = 50;
+            this.btnDatabaseExtendedProperties.Text = "خصائص قواعد البيانات";
+            this.btnDatabaseExtendedProperties.UseVisualStyleBackColor = true;
+            this.btnDatabaseExtendedProperties.Click += new System.EventHandler(this.btnDatabaseExtendedProperties_Click);
             // 
             // DataBase_Info_Fix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1348, 709);
+            this.Controls.Add(this.pictureBox15);
+            this.Controls.Add(this.btnDatabaseExtendedProperties);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnFixPhysicalFiles);
             this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.btnCheckPhysicalFiles);
@@ -487,6 +535,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -531,5 +580,9 @@
         private System.Windows.Forms.Button btnFixPhysicalFiles;
         private System.Windows.Forms.PictureBox pictureBox14;
         private System.Windows.Forms.Button btnCheckPhysicalFiles;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox pictureBox15;
+        private System.Windows.Forms.Button btnDatabaseExtendedProperties;
     }
 }
