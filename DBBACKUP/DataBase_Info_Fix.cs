@@ -1907,18 +1907,29 @@ IF
         {
             string state = GetDatabaseState(databaseName);
 
-            if (state == "ONLINE")
+            switch (state)
             {
-
-                panel1DBstate.BackColor = Color.Green;
-            }
-            else if (state == "OFFLINE")
-            {
-                panel1DBstate.BackColor = Color.Red;
-            }
-            else
-            {
-                panel1DBstate.BackColor = Color.Gray;
+                case "ONLINE":
+                    panel1DBstate.BackColor = Color.Green; // قاعدة البيانات أونلاين
+                    break;
+                case "OFFLINE":
+                    panel1DBstate.BackColor = Color.Red; // قاعدة البيانات أوفلاين
+                    break;
+                case "RESTORING":
+                    panel1DBstate.BackColor = Color.Orange; // قاعدة البيانات قيد الاستعادة
+                    break;
+                case "SUSPECT":
+                    panel1DBstate.BackColor = Color.Purple; // قاعدة البيانات في حالة اشتباه
+                    break;
+                case "EMERGENCY":
+                    panel1DBstate.BackColor = Color.Blue; // قاعدة البيانات في حالة الطوارئ
+                    break;
+                case "RECOVERY_PENDING":
+                    panel1DBstate.BackColor = Color.Yellow; // قاعدة البيانات في انتظار الاستعادة
+                    break;
+                default:
+                    panel1DBstate.BackColor = Color.Gray; // حالة غير معروفة
+                    break;
             }
         }
         private string GetDatabaseState(string databaseName)
@@ -1948,11 +1959,90 @@ IF
         {
 
         }
+        private void InitLastDBCCCheckDBRunDates()
+        {
+               DatabaseHelper dbHelper;
+            string connectionString = "Data Source=" + ComboBoxserverName.Text + "; Integrated Security=True; "; // استبدل بقيمة سلسلة الاتصال الخاصة بك
+            dbHelper = new DatabaseHelper(connectionString);
+
+            DataTable results = dbHelper.GetLastDBCCCheckDBRunDates();
+            dataGridView1.DataSource = results;
+
     }
+    private void LoadDbccResults()
+        {
+            string connectionString = $"Server={ComboBoxserverName.Text};Integrated Security=true;Database=master;";
+            string query = $@"
+USE [master];
+EXEC sp_configure @configname = 'filestream access level', @configvalue = 2;
+RECONFIGURE WITH OVERRIDE;
+ALTER DATABASE {ComboBoxDatabaseName.Text} SET EMERGENCY;
+ALTER DATABASE {ComboBoxDatabaseName.Text} SET SINGLE_USER;
+DBCC CHECKDB({ComboBoxDatabaseName.Text}, REPAIR_ALLOW_DATA_LOSS) WITH ALL_ERRORMSGS;
+ALTER DATABASE {ComboBoxDatabaseName.Text} SET MULTI_USER;
+";
 
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Message", typeof(string));
+            dt.Columns.Add("State", typeof(int));
 
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string message = reader["Message"].ToString();
+                                int state = Convert.ToInt32(reader["State"]);
+                                dt.Rows.Add(message, state);
+                            }
+                        }
+                    }
+                }
+                MessageBox.Show($"Success", "DBCC successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "DBCC Execution Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            dataGridView1.DataSource = dt;
+            InitLastDBCCCheckDBRunDates();
+            // التحقق من وجود أخطاء وإظهار الإشعارات
+            CheckForErrors(dt);
+        }
+        private void CheckForErrors(DataTable dt)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                string message = row["Message"].ToString();
+                if (message.Contains("error") || message.Contains("Error"))
+                {
+                    NotifyError(message);
+                }
+            }
+        }
+
+        private void NotifyError(string errorMessage)
+        {
+            MessageBox.Show(errorMessage, "DBCC Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void button5LoadDbccResults_Click(object sender, EventArgs e)
+        {
+            LoadDbccResults();
+        }
+
+    }
 }
 
+ 
 
     public class DatabaseFileChecker
     {
@@ -2103,9 +2193,79 @@ IF
 }
 
 
+ 
+public class DatabaseHelper
+{
+    private string connectionString;
 
+    public DatabaseHelper(string connectionString)
+    {
+        this.connectionString = connectionString;
+    }
 
+    public DataTable GetLastDBCCCheckDBRunDates()
+    {
+        DataTable resultTable = new DataTable();
 
+        string script = @"
+            CREATE TABLE #DBInfo
+            (
+                Id INT IDENTITY(1, 1),
+                ParentObject VARCHAR(255),
+                [Object] VARCHAR(255),
+                Field VARCHAR(255),
+                [Value] VARCHAR(255)
+            );
+
+            CREATE TABLE #Value
+            (
+                DatabaseName VARCHAR(255),
+                LastDBCCCheckDB_RunDate VARCHAR(255)
+            );
+
+            EXECUTE dbo.sp_foreachdb @command = '
+                INSERT INTO #DBInfo 
+                EXEC (''DBCC DBINFO (''''?'''') WITH TABLERESULTS'');
+                INSERT INTO #Value (DatabaseName) 
+                SELECT [Value] 
+                FROM #DBInfo 
+                WHERE Field IN (''dbi_dbname'');
+                UPDATE #Value 
+                SET LastDBCCCheckDB_RunDate = (
+                    SELECT TOP 1 [Value] 
+                    FROM #DBInfo 
+                    WHERE Field IN (''dbi_dbccLastKnownGood'')
+                ) 
+                WHERE LastDBCCCHeckDB_RunDate IS NULL;
+                TRUNCATE TABLE #DBInfo', 
+                @suppress_quotename = 1;
+
+            SELECT 
+                DatabaseName,
+                LastDBCCCheckDB_RunDate,
+                'DBCC CHECKDB(' + DatabaseName + ')' AS DBCCCOmmand
+            FROM #Value
+            ORDER BY LastDBCCCheckDB_RunDate;
+
+            DROP TABLE #DBInfo;
+            DROP TABLE #Value;
+        ";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            using (SqlCommand command = new SqlCommand(script, connection))
+            {
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    resultTable.Load(reader);
+                }
+            }
+        }
+
+        return resultTable;
+    }
+}
 
 
 
