@@ -126,7 +126,7 @@
             // lblFullName
             // 
             this.lblFullName.AutoSize = true;
-            this.lblFullName.Location = new System.Drawing.Point(281, 284);
+            this.lblFullName.Location = new System.Drawing.Point(753, 241);
             this.lblFullName.Name = "lblFullName";
             this.lblFullName.Size = new System.Drawing.Size(35, 13);
             this.lblFullName.TabIndex = 40;
@@ -135,7 +135,7 @@
             // 
             // ctlLastName
             // 
-            this.ctlLastName.Location = new System.Drawing.Point(281, 209);
+            this.ctlLastName.Location = new System.Drawing.Point(510, 241);
             this.ctlLastName.MinimumSize = new System.Drawing.Size(84, 53);
             this.ctlLastName.Name = "ctlLastName";
             this.ctlLastName.Size = new System.Drawing.Size(191, 53);
@@ -145,7 +145,7 @@
             // 
             // ctlFirstName
             // 
-            this.ctlFirstName.Location = new System.Drawing.Point(281, 136);
+            this.ctlFirstName.Location = new System.Drawing.Point(510, 165);
             this.ctlFirstName.MinimumSize = new System.Drawing.Size(84, 53);
             this.ctlFirstName.Name = "ctlFirstName";
             this.ctlFirstName.Size = new System.Drawing.Size(191, 53);
@@ -157,7 +157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 320);
+            this.ClientSize = new System.Drawing.Size(933, 320);
             this.Controls.Add(this.lblFullName);
             this.Controls.Add(this.ctlLastName);
             this.Controls.Add(this.ctlFirstName);

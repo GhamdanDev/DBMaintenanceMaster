@@ -277,6 +277,7 @@ namespace DBBACKUP
                 }
 
                 MessageBox.Show("User added successfully.");
+                LoadUsers();
             }
             catch (Exception ex)
             {

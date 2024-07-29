@@ -47,6 +47,30 @@ namespace DBBACKUP
             }
             dr.Close();
         }
+
+        private void ShowErrorMessage(string message)
+        {
+            Form errorForm = new Form
+            {
+                Text = "Error",
+                Width = 600,
+                Height = 400,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+
+            TextBox textBox = new TextBox
+            {
+                Multiline = true,
+                ReadOnly = true,
+                Dock = DockStyle.Fill,
+                Text = message,
+                ScrollBars = ScrollBars.Vertical
+            };
+
+            errorForm.Controls.Add(textBox);
+            errorForm.ShowDialog();
+        }
+
         public void Createconnection()
         {
             con = new SqlConnection("Data Source=" + (ComboBoxserverName.Text) + ";Database=Master;data source=.; Integrated Security=True;;");
@@ -140,12 +164,134 @@ public void RestoreDatabaseWithNewLocation()
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                    //MessageBox.Show("Error: " + ex.Message);
+                    ShowErrorMessage($"{ex.Message}");
             }
         }
     }
+        public void RestoreDatabaseWithNewName()
+        {
+            // Provide your SQL Server connection string
+            string connectionString = "Data Source=" + ComboBoxserverName.Text + ";Initial Catalog=master;Integrated Security=True";
 
-    public void RestoreDatabaseWithNewName()
+            // Show file dialog to select backup file
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Backup Files (*.bak)|*.bak|All Files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // Get the selected backup file path
+                    string backupFilePath = openFileDialog1.FileName;
+
+                    // Generate a new database name for the restored database
+                    string newDatabaseName = ComboBoxDatabaseName.Text + "_Restored_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                    // Define new paths for the database files
+                    string newMdfFilePath = @"C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\" + newDatabaseName + ".mdf";
+                    string newLdfFilePath = @"C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\" + newDatabaseName + "_log.ldf";
+
+                    // SQL query to restore database with new name and file paths
+                    string sqlQuery = "RESTORE DATABASE " + newDatabaseName +
+                                      " FROM DISK = '" + backupFilePath + "'" +
+                                      " WITH MOVE '" + ComboBoxDatabaseName.Text + "' TO '" + newMdfFilePath + "'," +
+                                      " MOVE '" + ComboBoxDatabaseName.Text + "'_log TO '" + newLdfFilePath + "'";
+
+                    // Establish connection and execute the query
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+                        SqlCommand command = new SqlCommand(sqlQuery, connection);
+                        command.ExecuteNonQuery();
+
+                        label3.Visible = true;
+                        label3.Text = "Database restored successfully as " + newDatabaseName;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorMessage($"{ex.Message}");
+                }
+            }
+        }
+        public void RestoreDatabaseWithNewName3()
+        {
+            // Provide your SQL Server connection string
+            string connectionString = "Data Source=" + ComboBoxserverName.Text + ";Initial Catalog=master;Integrated Security=True";
+
+            // Show file dialog to select backup file
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Backup Files (*.bak)|*.bak|All Files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // Get the selected backup file path
+                    string backupFilePath = openFileDialog1.FileName;
+
+                    // Generate a new database name for the restored database
+                    string newDatabaseName = ComboBoxDatabaseName.Text + "_Restored_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                    // Get the file list from the backup
+                    List<(string LogicalName, string Type)> fileList = new List<(string, string)>();
+
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+                        string fileListQuery = $"RESTORE FILELISTONLY FROM DISK = '{backupFilePath}'";
+                        SqlCommand fileListCommand = new SqlCommand(fileListQuery, connection);
+                        using (SqlDataReader reader = fileListCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string logicalName = reader["LogicalName"].ToString();
+                                string type = reader["Type"].ToString(); // D for data file, L for log file
+                                fileList.Add((logicalName, type));
+                            }
+                        }
+
+                        // Generate the MOVE clauses for each file
+                        string moveClauses = "";
+                        foreach (var file in fileList)
+                        {
+                            string newFilePath = (file.Type == "D")
+                                ? $@"C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\{newDatabaseName}_{file.LogicalName}.mdf"
+                                : $@"C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\{newDatabaseName}_{file.LogicalName}.ldf";
+
+                            moveClauses += $" MOVE '{file.LogicalName}' TO '{newFilePath}',";
+                        }
+
+                        // Remove the trailing comma
+                        if (moveClauses.EndsWith(","))
+                        {
+                            moveClauses = moveClauses.Substring(0, moveClauses.Length - 1);
+                        }
+
+                        // SQL query to restore database with new name and file paths
+                        string sqlQuery = $"RESTORE DATABASE {newDatabaseName} FROM DISK = '{backupFilePath}' WITH {moveClauses}";
+
+                        // Execute the restore query
+                        SqlCommand restoreCommand = new SqlCommand(sqlQuery, connection);
+                        restoreCommand.ExecuteNonQuery();
+
+                        label3.Visible = true;
+                        label3.Text = "Database restored successfully as " + newDatabaseName;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorMessage($"{ex.Message}");
+                }
+            }
+        }
+
+        public void RestoreDatabaseWithNewName1()
         {
            
 
@@ -184,7 +330,7 @@ public void RestoreDatabaseWithNewLocation()
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    ShowErrorMessage($"{ex.Message}");
                 }
             }
         }
@@ -368,8 +514,8 @@ public void RestoreDatabaseWithNewLocation()
             //CreateDatabaseFromBackup(".","newdatabase","");
             //CreateDatabaseCopy("restore");
             //CreateNewDatabaseCopy();
-            //RestoreDatabaseWithNewName();
-            RestoreDatabaseWithNewLocation();
+            RestoreDatabaseWithNewName3();
+            //RestoreDatabaseWithNewLocation();
         }
 
         private void ctlFirstName_TextChanged(object sender, EventArgs e)
