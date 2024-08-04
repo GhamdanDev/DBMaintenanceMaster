@@ -136,6 +136,12 @@
     <Compile Include="AdvanceFuture.Designer.cs">
       <DependentUpon>AdvanceFuture.cs</DependentUpon>
     </Compile>
+    <Compile Include="BackupInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackupInfoForm.Designer.cs">
+      <DependentUpon>BackupInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClearableTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     </Compile>
     <EmbeddedResource Include="AdvanceFuture.resx">
       <DependentUpon>AdvanceFuture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackupInfoForm.resx">
+      <DependentUpon>BackupInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ClearableTextBox.resx">
       <DependentUpon>ClearableTextBox.cs</DependentUpon>

@@ -56,9 +56,34 @@ namespace DBBACKUP
      
     }
 
+public class ErrorMessageBox
+    {
 
+       static public void ShowErrorMessage(string message)
+        {
+            Form errorForm = new Form
+            {
+                Text = "Error",
+                Width = 600,
+                Height = 400,
+                StartPosition = FormStartPosition.CenterScreen
+            };
 
-  
+            TextBox textBox = new TextBox
+            {
+                Multiline = true,
+                ReadOnly = true,
+                Dock = DockStyle.Fill,
+                Text = message,
+                ScrollBars = ScrollBars.Vertical
+            };
+
+            errorForm.Controls.Add(textBox);
+            errorForm.ShowDialog();
+        }
+
+    }
+
 
 
     public class ChatGPTClient

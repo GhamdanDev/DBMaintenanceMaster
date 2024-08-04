@@ -77,6 +77,10 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.radioButtonDaily = new System.Windows.Forms.RadioButton();
+            this.radioButtonHourly = new System.Windows.Forms.RadioButton();
+            this.radioButtonMinutely = new System.Windows.Forms.RadioButton();
+            this.button10savetotblBackupInfWithIntervalType = new System.Windows.Forms.Button();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -96,7 +100,7 @@
             this.Label21.Location = new System.Drawing.Point(0, 0);
             this.Label21.Name = "Label21";
             this.Label21.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Label21.Size = new System.Drawing.Size(984, 25);
+            this.Label21.Size = new System.Drawing.Size(1046, 25);
             this.Label21.TabIndex = 3;
             this.Label21.Text = "نظام ادارة  قواعد البيانات";
             this.Label21.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -238,7 +242,7 @@
             this.label13.BackColor = System.Drawing.Color.SteelBlue;
             this.label13.Dock = System.Windows.Forms.DockStyle.Right;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(982, 25);
+            this.label13.Location = new System.Drawing.Point(1044, 25);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(2, 458);
             this.label13.TabIndex = 1362;
@@ -250,7 +254,7 @@
             this.label22.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.Location = new System.Drawing.Point(0, 481);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(982, 2);
+            this.label22.Size = new System.Drawing.Size(1044, 2);
             this.label22.TabIndex = 1363;
             // 
             // label20
@@ -344,7 +348,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label12.Location = new System.Drawing.Point(768, 261);
+            this.label12.Location = new System.Drawing.Point(482, 316);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(204, 25);
             this.label12.TabIndex = 1373;
@@ -479,7 +483,7 @@
             // pictureBox8
             // 
             this.pictureBox8.Image = global::DBBACKUP.Properties.Resources.info_30px;
-            this.pictureBox8.Location = new System.Drawing.Point(732, 261);
+            this.pictureBox8.Location = new System.Drawing.Point(446, 316);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(37, 37);
             this.pictureBox8.TabIndex = 1394;
@@ -646,12 +650,59 @@
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // radioButtonDaily
+            // 
+            this.radioButtonDaily.AutoSize = true;
+            this.radioButtonDaily.Location = new System.Drawing.Point(817, 149);
+            this.radioButtonDaily.Name = "radioButtonDaily";
+            this.radioButtonDaily.Size = new System.Drawing.Size(56, 21);
+            this.radioButtonDaily.TabIndex = 1400;
+            this.radioButtonDaily.TabStop = true;
+            this.radioButtonDaily.Text = "يومي";
+            this.radioButtonDaily.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonHourly
+            // 
+            this.radioButtonHourly.AutoSize = true;
+            this.radioButtonHourly.Location = new System.Drawing.Point(736, 149);
+            this.radioButtonHourly.Name = "radioButtonHourly";
+            this.radioButtonHourly.Size = new System.Drawing.Size(62, 21);
+            this.radioButtonHourly.TabIndex = 1401;
+            this.radioButtonHourly.TabStop = true;
+            this.radioButtonHourly.Text = "الساعه";
+            this.radioButtonHourly.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonMinutely
+            // 
+            this.radioButtonMinutely.AutoSize = true;
+            this.radioButtonMinutely.Location = new System.Drawing.Point(666, 149);
+            this.radioButtonMinutely.Name = "radioButtonMinutely";
+            this.radioButtonMinutely.Size = new System.Drawing.Size(64, 21);
+            this.radioButtonMinutely.TabIndex = 1402;
+            this.radioButtonMinutely.TabStop = true;
+            this.radioButtonMinutely.Text = "الدقائق";
+            this.radioButtonMinutely.UseVisualStyleBackColor = true;
+            // 
+            // button10savetotblBackupInfWithIntervalType
+            // 
+            this.button10savetotblBackupInfWithIntervalType.Location = new System.Drawing.Point(883, 144);
+            this.button10savetotblBackupInfWithIntervalType.Name = "button10savetotblBackupInfWithIntervalType";
+            this.button10savetotblBackupInfWithIntervalType.Size = new System.Drawing.Size(89, 25);
+            this.button10savetotblBackupInfWithIntervalType.TabIndex = 1403;
+            this.button10savetotblBackupInfWithIntervalType.Text = "بدا المزامنه";
+            this.button10savetotblBackupInfWithIntervalType.UseVisualStyleBackColor = true;
+            this.button10savetotblBackupInfWithIntervalType.Click += new System.EventHandler(this.btnSaveTotblBackupInfWithIntervalType_Click);
+            // 
             // FrmDbBackup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(984, 483);
+            this.ClientSize = new System.Drawing.Size(1046, 483);
+            this.Controls.Add(this.button10savetotblBackupInfWithIntervalType);
+            this.Controls.Add(this.radioButtonMinutely);
+            this.Controls.Add(this.radioButtonHourly);
+            this.Controls.Add(this.radioButtonDaily);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -772,5 +823,9 @@
         internal System.Windows.Forms.Button button8;
         internal System.Windows.Forms.Button button5;
         internal System.Windows.Forms.Button button9;
+        private System.Windows.Forms.RadioButton radioButtonDaily;
+        private System.Windows.Forms.RadioButton radioButtonHourly;
+        private System.Windows.Forms.RadioButton radioButtonMinutely;
+        private System.Windows.Forms.Button button10savetotblBackupInfWithIntervalType;
     }
 }

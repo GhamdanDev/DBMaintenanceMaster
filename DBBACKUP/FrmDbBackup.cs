@@ -130,6 +130,98 @@ namespace DBBACKUP
                 }
             }
         }
+        /*      private void btnSaveTotblBackupInfWithIntervalType_Click(object sender, EventArgs e)
+              {
+                  // استبدل بـ بيانات الاتصال الخاصة بك
+                  String sqlCon ="Data Source=.; Initial Catalog=infoDB; Integrated Security=True;";
+
+
+                  using (SqlConnection connection = new SqlConnection(sqlCon))
+                  {
+                      string query = "INSERT INTO tblBackupInfWithIntervalType (DayInterval, NoOfFiles, DatabaseName, Location, SoftwareDate, LastEditDate, CreationDate, IntervalType) " +
+                                     "VALUES (@DayInterval, @NoOfFiles, @DatabaseName, @Location, @SoftwareDate, @LastEditDate, @CreationDate, @IntervalType)";
+
+                      using (SqlCommand command = new SqlCommand(query, connection))
+                      {
+                          // تعيين القيم لملف النسخ الاحتياطي
+                          command.Parameters.AddWithValue("@DayInterval", int.Parse(txtSpan.Text));
+                          command.Parameters.AddWithValue("@NoOfFiles", int.Parse(txtNoOfFiles.Text));
+                          command.Parameters.AddWithValue("@DatabaseName", ComboBoxDatabaseName.Text);
+                          command.Parameters.AddWithValue("@Location", LinkLabel1.Text);
+                          command.Parameters.AddWithValue("@SoftwareDate", DateTimePicker1.Text);
+                          command.Parameters.AddWithValue("@LastEditDate",DateTime.Now);
+                          command.Parameters.AddWithValue("@CreationDate", DateTimePicker1.Text);
+
+                          // تعيين نوع الفاصل الزمني
+                          int intervalType = radioButtonDaily.Checked ? 1 :
+                                             radioButtonHourly.Checked ? 2 : 3;
+                          command.Parameters.AddWithValue("@IntervalType", intervalType);
+
+                          // فتح الاتصال و تنفيذ الاستعلام
+                          connection.Open();
+                          command.ExecuteNonQuery();
+                          connection.Close();
+                      }
+                  }
+
+                  MessageBox.Show("Data saved successfully!");
+              }
+         */
+
+        private void btnSaveTotblBackupInfWithIntervalType_Click(object sender, EventArgs e)
+        {
+            // استبدل بـ بيانات الاتصال الخاصة بك
+            string sqlCon = "Data Source=.; Initial Catalog=infoDB; Integrated Security=True;";
+
+            using (SqlConnection connection = new SqlConnection(sqlCon))
+            {
+                string query = "INSERT INTO tblBackupInfWithIntervalType (DayInterval, NoOfFiles, DatabaseName, Location, SoftwareDate, LastEditDate, CreationDate, IntervalType) " +
+                               "VALUES (@DayInterval, @NoOfFiles, @DatabaseName, @Location, @SoftwareDate, @LastEditDate, @CreationDate, @IntervalType)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    // تعيين نوع الفاصل الزمني
+                    int intervalType = radioButtonDaily.Checked ? 1 :
+                                       radioButtonHourly.Checked ? 2 : 3;
+
+                    // تحويل الفاصل الزمني إلى المللي ثانية بناءً على نوع الفاصل الزمني
+                    int span = int.Parse(txtSpan.Text);
+                    int dayIntervalMilliseconds = 0;
+
+                    switch (intervalType)
+                    {
+                        case 1: // يومي
+                            dayIntervalMilliseconds = span * 24 * 60 * 60 * 1000;
+                            break;
+                        case 2: // ساعياً
+                            dayIntervalMilliseconds = span * 60 * 60 * 1000;
+                            break;
+                        case 3: // دقائقياً
+                            dayIntervalMilliseconds = span * 60 * 1000;
+                            break;
+                        default:
+                            throw new Exception("IntervalType غير صالح.");
+                    }
+
+                    // تعيين القيم لملف النسخ الاحتياطي
+                    command.Parameters.AddWithValue("@DayInterval", dayIntervalMilliseconds);
+                    command.Parameters.AddWithValue("@NoOfFiles", int.Parse(txtNoOfFiles.Text));
+                    command.Parameters.AddWithValue("@DatabaseName", ComboBoxDatabaseName.Text);
+                    command.Parameters.AddWithValue("@Location", LinkLabel1.Text);
+                    command.Parameters.AddWithValue("@SoftwareDate", DateTimePicker1.Value);
+                    command.Parameters.AddWithValue("@LastEditDate", DateTime.Now);
+                    command.Parameters.AddWithValue("@CreationDate", DateTimePicker1.Value);
+                    command.Parameters.AddWithValue("@IntervalType", intervalType);
+
+                    // فتح الاتصال و تنفيذ الاستعلام
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+
+            MessageBox.Show("Data saved successfully!");
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -173,6 +265,7 @@ namespace DBBACKUP
 
         private void Timer1_Tick(object sender, EventArgs e)
                 {
+            //simple commit 
                     ProgressBarEx5.Value += 1;
                     if (ProgressBarEx5.Value == 100)
                     {
@@ -314,11 +407,64 @@ namespace DBBACKUP
                 }
             }
             catch (Exception ex)
-            {
-                MessageBox.Show($"Error initializing backup timer: {ex.Message}");
+            { 
+                ErrorMessageBox.ShowErrorMessage($"Error initializing backup timer: {ex.Message}");
             }
         }
+        private void InitializeBackupTimerV2()
+        {
+            try
+            {
+                using (SqlConnection sqlCon = new SqlConnection(conString))
+                {
+                    sqlCon.Open();
+                    string query = "SELECT TOP 1 [DayInterval], [IntervalType] FROM [infoDB].[dbo].[tblBackupInfWithIntervalType] ORDER BY [LastEditDate] DESC";
+                    using (SqlCommand command = new SqlCommand(query, sqlCon))
+                    {
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            int interval = Convert.ToInt32(reader["DayInterval"]);
+                            int intervalType = Convert.ToInt32(reader["IntervalType"]);
 
+                            int intervalMilliseconds = 0;
+
+                            switch (intervalType)
+                            {
+                                case 1: // يومي
+                                    intervalMilliseconds = interval * 24 * 60 * 60 * 1000;
+                                    break;
+                                case 2: // ساعياً
+                                    intervalMilliseconds = interval * 60 * 60 * 1000;
+                                    break;
+                                case 3: // دقائقياً
+                                    intervalMilliseconds = interval * 60 * 1000;
+                                    break;
+                                default:
+                                    throw new Exception("IntervalType غير صالح.");
+                            }
+
+                            backupTimer = new Timer
+                            {
+                                Interval = intervalMilliseconds
+                            };
+
+                            backupTimer.Tick += BackupTimer_Tick;
+                            backupTimer.Start();
+                            MessageBox.Show($"InitializeBackupTimer successfully with interval type {intervalType} and interval {interval}.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No DayInterval found in tblBackupInfWithIntervalType.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessageBox.ShowErrorMessage($"Error initializing backup timer: {ex.Message}");
+            }
+        }
         private void BackupTimer_Tick(object sender, EventArgs e)
         {
             backupTimer.Stop(); // Stop the timer after the first tick
@@ -433,7 +579,8 @@ namespace DBBACKUP
 
                 private void button1_Click_1(object sender, EventArgs e)
                 {
-                    InitializeBackupTimer();
+            //InitializeBackupTimer();
+            InitializeBackupTimerV2();
                 }
 
         private void button3_Schedule_Click(object sender, EventArgs e)
