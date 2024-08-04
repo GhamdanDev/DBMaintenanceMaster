@@ -19,8 +19,10 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '7.0.x' # استخدم الإصدار الأحدث من .NET
-    - name: Install SSDT
-      run: choco install sql-server-data-tools -y
+    - name: Install Visual Studio and SSDT components
+      run: |
+        choco install visualstudio-installer -y
+        vs_installer.exe modify --add Microsoft.VisualStudio.Component.SQL.SSDT --add Microsoft.VisualStudio.Component.SQL.DataTools --includeRecommended --passive
     - name: Install dependencies
       run: dotnet restore
     - name: Build
