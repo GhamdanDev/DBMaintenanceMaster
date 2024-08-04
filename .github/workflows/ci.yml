@@ -20,10 +20,10 @@ jobs:
       with:
         dotnet-version: '7.0.x' # استخدم الإصدار الأحدث من .NET
     - name: Install SSDT
-      run: choco install microsoft-sql-server-data-tools -y
+      run: choco install sql-server-data-tools -y
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: msbuild /p:Configuration=Debug
+      run: msbuild /p:Configuration=Debug DBBACKUP.sln
     - name: Test
       run: dotnet test --no-build --verbosity normal
