@@ -1,4 +1,3 @@
-```md
 # 📀 Database Backup and Management System
 
 ## 📌 Overview
