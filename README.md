@@ -1,5 +1,10 @@
 # 📀 Database Backup and Management System
 
+**Database-Maintainer** is a comprehensive solution designed to simplify the maintenance and management of SQL Server databases for DBAs, developers, and IT teams. It offers powerful automation, smart repair tools, and intuitive controls to ensure database health and stability.
+
+
+![ChatGPT Image May 16, 2025, 10_00_07 PM](https://github.com/user-attachments/assets/16b7e8f9-94e0-4040-b1ed-774f85f78c61)
+
 ## 📌 Overview
 This project is a comprehensive **Database Backup and Management System** designed to facilitate the backup, restoration, and management of SQL Server databases. It provides a **user-friendly interface** with advanced features like:
 
